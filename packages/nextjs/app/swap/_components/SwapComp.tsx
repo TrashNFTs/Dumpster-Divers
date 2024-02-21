@@ -78,6 +78,6 @@ export function SwapComp()  {
       </div>
     </>
   );
-};
+}
 
 export default SwapComp;
