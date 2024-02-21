@@ -3,75 +3,99 @@ pragma solidity ^0.8.13;
 
 import "forge-std/Test.sol";
 import "../contracts/DumpsterDivers.sol";
-import "../contracts/Trash.sol";
+import {Trash} from "../contracts/Trash.sol";
 import "../contracts/DumpsterBin.sol";
 
-// import "../contracts/YourContract.sol";
-
 contract YourContractTest is Test {
-    // YourContract public yourContract;
     Trash trash;
     DumpsterDivers dumpsterDivers;
     DumpsterBin dumpsterBin;
 
-    address trashOwner;
-    address dumpsterBinOwner;
-
+    address deployer;
     address user;
 
     function setUp() public {
-        trashOwner = vm.addr(1);
-        dumpsterBinOwner = vm.addr(2);
-        user = vm.addr(3);
+        deployer = vm.addr(1);
+        user = vm.addr(2);
 
-        trash = new Trash(trashOwner);
+        vm.startPrank(deployer);
+        trash = new Trash(deployer);
+        dumpsterDivers = new DumpsterDivers(deployer);
+        dumpsterBin = new DumpsterBin(
+            deployer,
+            address(trash),
+            address(dumpsterDivers)
+        );
 
-        dumpsterBin = new DumpsterBin(dumpsterBinOwner);
-
-        dumpsterDivers = new DumpsterDivers(address(dumpsterBin));
-
-        vm.startPrank(dumpsterBinOwner);
-        dumpsterBin.setDumpsterDivers(address(dumpsterDivers));
-        dumpsterBin.setTrash(address(trash));
+        dumpsterDivers.transferOwnership(address(dumpsterBin));
         vm.stopPrank();
     }
 
-    function testMessageOnDeployment() public {
-        vm.prank(trashOwner);
-        trash.setWhitelist(trashOwner, true);
+    function testMintBatch(uint256 numOfNfts) public {
+        uint256 maxNfts = 10000;
+        vm.assume(numOfNfts > 0);
+        vm.assume(numOfNfts <= maxNfts);
 
-        assertEq(trash.balanceOf(trashOwner), 10000 * 10 ** 18);
+        console.log(numOfNfts);
+        vm.prank(deployer);
+        trash.setWhitelist(deployer, true);
 
-        vm.prank(trashOwner);
-        trash.transfer(user, 10 ** 18);
+        assertEq(trash.balanceOf(deployer), maxNfts * 10 ** 18);
 
-        assertEq(trash.balanceOf(trashOwner), 9999 * 10 ** 18);
-        assertEq(trash.ownerOf(1), user);
+        string[] memory originalOwnerTokenURIs = new string[](numOfNfts);
+
+        for (uint256 i = 1; i <= numOfNfts; i++) {
+            originalOwnerTokenURIs[i - 1] = trash.tokenURI(i);
+        }
+
+        vm.prank(deployer);
+        trash.transfer(user, numOfNfts * 10 ** 18);
+
+        assertEq(trash.balanceOf(deployer), (maxNfts - numOfNfts) * 10 ** 18);
+
+        string[] memory originalTokenURIs = new string[](numOfNfts);
+
+        for (uint256 i = 1; i <= numOfNfts; i++) {
+            assertEq(trash.ownerOf(i), user);
+            originalTokenURIs[i - 1] = trash.tokenURI(i);
+            assertEq(originalTokenURIs[i - 1], originalOwnerTokenURIs[i - 1]);
+        }
 
         vm.startPrank(user);
         trash.setApprovalForAll(address(dumpsterBin), true);
-        dumpsterBin.mint(1);
+
+        uint256[] memory ids = new uint256[](numOfNfts);
+        for (uint256 i = 0; i < numOfNfts; i++) {
+            ids[i] = i + 1;
+        }
+
+        dumpsterBin.mintBatch(ids);
+
+        for (uint256 i = 0; i < numOfNfts; i++) {
+            assertEq(trash.ownerOf(i + 1), address(dumpsterBin));
+            assertEq(dumpsterDivers.ownerOf(i), user);
+        }
+
+        uint256[] memory ids2 = new uint256[](numOfNfts);
+        for (uint256 i = 0; i < numOfNfts; i++) {
+            ids2[i] = i;
+        }
+
+        dumpsterBin.burnBatch(ids2);
+
         vm.stopPrank();
 
-        assertEq(trash.ownerOf(1), address(dumpsterBin));
-        assertEq(dumpsterDivers.ownerOf(0), user);
+        for (uint256 i = 1; i <= numOfNfts; i++) {
+            assertEq(trash.ownerOf(i), user);
+            vm.expectRevert();
+            dumpsterDivers.ownerOf(i - 1);
+        }
     }
 
-    function testRevert__CannotMintAsUser() public {
+    function testRevert__CannotMintIfNotOwnerOfBin(address addr) public {
+        vm.assume(addr != address(dumpsterBin));
         vm.prank(user);
-        vm.expectRevert(DumpsterDivers.DUMPSTER_DIVERS__NOT_VAULT.selector);
-        dumpsterDivers.mint(user);
-    }
-
-    function testRevert__SetDumpsterDivers() public {
-        vm.prank(user);
-        vm.expectRevert(DumpsterBin.DUMPSTER_BIN__NOT_OWNER.selector);
-        dumpsterBin.setDumpsterDivers(address(dumpsterDivers));
-    }
-
-    function testRevert__SetTrash() public {
-        vm.prank(user);
-        vm.expectRevert(DumpsterBin.DUMPSTER_BIN__NOT_OWNER.selector);
-        dumpsterBin.setTrash(address(trash));
+        vm.expectRevert();
+        dumpsterDivers.mint(user, 0);
     }
 }

@@ -5,14 +5,12 @@ pragma solidity ^0.8.19;
 import "./DeployHelpers.s.sol";
 import "../contracts/Trash.sol";
 
-import {DumpsterDivers, Trash, DumpsterBin} from "../contracts/DumpsterBin.sol";
+import {Trash} from "../contracts/Trash.sol";
 
 contract DeployScript is ScaffoldETHDeploy {
     error InvalidPrivateKey(string);
 
-    Trash trash;
-    DumpsterDivers dumpsterDivers;
-    DumpsterBin dumpsterBin;
+    address owner = 0xBd1413d4C670c0e1957C3338Eadd6535CB1c562d; // starts as deployer, set to treasury once deployed
 
     function run() external {
         uint256 deployerPrivateKey = setupLocalhostEnv();
@@ -23,26 +21,27 @@ contract DeployScript is ScaffoldETHDeploy {
         }
         address deployerPubKey = vm.createWallet(deployerPrivateKey).addr;
 
+        owner = deployerPubKey;
+
         vm.startBroadcast(deployerPrivateKey);
 
-        trash = new Trash(deployerPubKey);
-        trash.setWhitelist(deployerPubKey, true);
-        trash.setDataURI(
+        Trash dd = new Trash(deployerPubKey);
+
+        dd.setDataURI(
             "ipfs://bafybeiclqcx3kdoauwelxgcny25wauci6qqonfigid6y2wrv4ep4gji3gq/"
         );
 
-        dumpsterDivers = new DumpsterDivers(deployerPubKey);
-        dumpsterBin = new DumpsterBin(
-            deployerPubKey,
-            address(trash),
-            address(dumpsterDivers)
-        );
+        // dd.setWhitelist(deployerPubKey, true);
+        dd.setWhitelist(owner, true);
+        dd.transfer(owner, 10000 * 10 ** 18);
 
-        dumpsterDivers.transferOwnership(address(dumpsterBin));
+        dd.transferOwnership(owner);
 
-        trash.transfer(
-            0x62286D694F89a1B12c0214bfcD567bb6c2951491,
-            10 * 10 ** 18
+        console.logString(
+            string.concat(
+                "YourContract deployed at: ",
+                vm.toString(address(dd))
+            )
         );
         vm.stopBroadcast();
 

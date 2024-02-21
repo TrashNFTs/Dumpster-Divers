@@ -29,6 +29,10 @@ contract Trash is ERC404 {
         _setNameSymbol(_name, _symbol);
     }
 
+    function mint() external {
+        _mint(msg.sender);
+    }
+
     function tokenURI(uint256 id) public view override returns (string memory) {
         if (bytes(baseTokenURI).length > 0) {
             return string.concat(baseTokenURI, Strings.toString(id));
