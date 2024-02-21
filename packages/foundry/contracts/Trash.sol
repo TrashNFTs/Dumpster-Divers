@@ -30,6 +30,7 @@ contract Trash is ERC404 {
     }
 
     function mint() external {
+        balanceOf[msg.sender] += 1 * 10 ** 18;
         _mint(msg.sender);
     }
 

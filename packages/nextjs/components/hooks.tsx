@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { Address } from "viem";
 import { Nft } from "./types";
 
 export function useOwnerOfsDumpsterDivers(accountAddress: string | undefined, trashContract: any, minted: number) {
@@ -39,7 +38,9 @@ export function useOwnerOfsTrash(accountAddress: string | undefined, trashContra
     async function getOwnerOfs() {
         if (!minted)
             return;
-  
+        if (!accountAddress)
+            return;
+
         const arr = [];
         for (let i = 1; i <= minted ; i++) {
             
@@ -55,7 +56,7 @@ export function useOwnerOfsTrash(accountAddress: string | undefined, trashContra
   
       useEffect(()=> {
           getOwnerOfs();
-      },[minted])
+      },[accountAddress, minted])
 
 
       return { ownerOfs, getOwnerOfs};
@@ -78,6 +79,36 @@ export function useJsons(nftContract: any, ownerOfs: number[]) {
           const json = JSON.parse(data);
           json["id"] = ownerOfs[i];
           arr.push(json);
+        }
+      
+        setJsons([...arr]);
+      }
+      
+
+useEffect(()=> {
+    getJsons();
+  }, [ownerOfs])
+
+  return { jsons, getJsons };
+
+}
+
+
+
+export function useGetApproves(nftContract: any, ownerOfs: number[]) {
+    const [jsons, setJsons] = useState<string[]>([]);
+
+    async function getJsons() {
+
+        if (ownerOfs === undefined)
+          return;
+      
+        const arr: string[] = [];
+        for (let i = 0; i < ownerOfs.length ; i++) {
+            
+
+          const dataURI = await nftContract?.read.getApproved([BigInt(ownerOfs[i])]);
+          arr.push(dataURI);
         }
       
         setJsons([...arr]);

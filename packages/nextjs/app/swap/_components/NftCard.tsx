@@ -1,5 +1,3 @@
-import { useAccount } from "wagmi";
-import { useScaffoldContract, useScaffoldContractRead, useScaffoldContractWrite } from "~~/hooks/scaffold-eth";
 import { Nft } from "~~/components/types";
 
 interface NftCardProps {

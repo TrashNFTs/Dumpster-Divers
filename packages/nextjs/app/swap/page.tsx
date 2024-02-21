@@ -1,7 +1,4 @@
 import type { NextPage } from "next";
-import { useEffect, useState } from "react";
-import { useAccount } from "wagmi";
-import { useScaffoldContract, useScaffoldContractRead } from "~~/hooks/scaffold-eth";
 import { getMetadata } from "~~/utils/scaffold-eth/getMetadata";
 import SwapComp from "./_components/SwapComp";
 
