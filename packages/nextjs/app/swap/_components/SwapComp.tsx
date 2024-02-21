@@ -71,7 +71,7 @@ export function SwapComp()  {
         { nfts }
         </div>
 
-        <p>Vault's Trash</p>
+        <p>Vaults Trash</p>
         <div className="grid grid-cols-5">
         { vaultsNfts }
         </div>
