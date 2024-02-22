@@ -1,6 +1,6 @@
+import SwapComp from "./_components/SwapComp";
 import type { NextPage } from "next";
 import { getMetadata } from "~~/utils/scaffold-eth/getMetadata";
-import SwapComp from "./_components/SwapComp";
 
 export const metadata = getMetadata({
   title: "Dumpster Bin Swap",
@@ -10,7 +10,7 @@ export const metadata = getMetadata({
 const Swap: NextPage = () => {
   return (
     <>
-    <SwapComp/>
+      <SwapComp />
     </>
   );
 };

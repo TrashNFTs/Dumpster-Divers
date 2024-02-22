@@ -26,8 +26,8 @@ export const menuLinks: HeaderMenuLink[] = [
   },
   {
     label: "Swap",
-    href: "/swap"
-  }
+    href: "/swap",
+  },
 ];
 
 export const HeaderMenuLinks = () => {

@@ -1,124 +1,111 @@
-import { useState, useEffect } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Nft } from "./types";
 
-export function useOwnerOfsDumpsterDivers(accountAddress: string | undefined, trashContract: any, minted: number) {
-    const [ownerOfs, setOwnerOfs] = useState<number[]>([]);
+export function useReadOwnerOfsDumpsterDivers(
+  accountAddress: string | undefined,
+  mintCount: bigint | undefined,
+  dumpsterDiverContract: any | undefined
+) {
+  const [data, setData] = useState<bigint[]>([]);
 
-    async function getOwnerOfs() {
-        if (!minted)
-            return;
-  
-        const arr = [];
-        for (let i = 0; i < minted ; i++) {
-  
-            const doesExist = await trashContract?.read.tokenExists([BigInt(i)]);
+  const refetch = useCallback(async ()=> {
 
-            if (doesExist) {
-                const ownerOf = await trashContract?.read.ownerOf([BigInt(i)]);
-                if (ownerOf === accountAddress) {
-                    arr.push(i);
-                }
-            }
+    const arr: bigint[] = [];
+
+    for (let i = 0; i < Number(mintCount); i++) {
+      const doesExist = await dumpsterDiverContract?.read.tokenExists([BigInt(i)]);
+
+      if (doesExist) {
+        const ownerOf = await dumpsterDiverContract?.read.ownerOf([BigInt(i)]);
+        if (ownerOf === accountAddress) {
+          arr.push(BigInt(i));
         }
-  
-        setOwnerOfs([...arr]);
-    }
-  
-      useEffect(()=> {
-          getOwnerOfs();
-      },[minted])
-
-
-      return { ownerOfs, getOwnerOfs};
-}
-
-export function useOwnerOfsTrash(accountAddress: string | undefined, trashContract: any, minted: number) {
-    const [ownerOfs, setOwnerOfs] = useState<number[]>([]);
-
-    async function getOwnerOfs() {
-        if (!minted)
-            return;
-        if (!accountAddress)
-            return;
-
-        const arr = [];
-        for (let i = 1; i <= minted ; i++) {
-            
-                    const ownerOf = await trashContract?.read.ownerOf([BigInt(i)]);
-                    if (ownerOf === accountAddress) {
-                        arr.push(i);
-                    }
-                
-        }
-  
-        setOwnerOfs([...arr]);
-    }
-  
-      useEffect(()=> {
-          getOwnerOfs();
-      },[accountAddress, minted])
-
-
-      return { ownerOfs, getOwnerOfs};
-}
-
-export function useJsons(nftContract: any, ownerOfs: number[]) {
-    const [jsons, setJsons] = useState<Nft[]>([]);
-
-    async function getJsons() {
-
-        if (ownerOfs === undefined)
-          return;
-      
-        const arr: Nft[] = [];
-        for (let i = 0; i < ownerOfs.length ; i++) {
-      
-          const dataURI = await nftContract?.read.tokenURI([BigInt(ownerOfs[i])]);
-      
-          const data = Buffer.from(dataURI!.substring(27), "utf-8").toString();
-          const json = JSON.parse(data);
-          json["id"] = ownerOfs[i];
-          arr.push(json);
-        }
-      
-        setJsons([...arr]);
       }
-      
+    }
 
-useEffect(()=> {
-    getJsons();
-  }, [ownerOfs])
+    setData([...arr]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [accountAddress, mintCount, dumpsterDiverContract?.address]);
 
-  return { jsons, getJsons };
+  useEffect(() => {
+    refetch();
+  }, [refetch]);
 
+  return { data, refetch };
 }
 
+export function useReadOwnerOfsTrash(accountAddress: string | undefined, trashContract: any | undefined, mintCount: number | undefined) {
+  const [data, setData] = useState<number[]>([]);
 
+  const refetch = useCallback(async () => {
+    if (!mintCount) return;
+    if (!accountAddress) return;
+    if (!trashContract) return;
 
-export function useGetApproves(nftContract: any, ownerOfs: number[]) {
-    const [jsons, setJsons] = useState<string[]>([]);
-
-    async function getJsons() {
-
-        if (ownerOfs === undefined)
-          return;
-      
-        const arr: string[] = [];
-        for (let i = 0; i < ownerOfs.length ; i++) {
-            
-
-          const dataURI = await nftContract?.read.getApproved([BigInt(ownerOfs[i])]);
-          arr.push(dataURI);
-        }
-      
-        setJsons([...arr]);
+    const arr = [];
+    for (let i = 1; i <= mintCount; i++) {
+      const ownerOf = await trashContract?.read.ownerOf([BigInt(i)]);
+      if (ownerOf === accountAddress) {
+        arr.push(i);
       }
-      
+    }
 
-useEffect(()=> {
-    getJsons();
-  }, [ownerOfs])
+    setData([...arr]);
+  }, [accountAddress, mintCount, trashContract]);
 
-  return { jsons, getJsons };
+  // useEffect(() => {
+  //   refetch();
+  // }, [accountAddress, mintCount, trashContract?.read, refetch]);
 
+  return { data, refetch };
+}
+
+export function useReadTokenURIsUTF8(nftContract: any | undefined, tokenIds: bigint[] | undefined) {
+  const [data, setData] = useState<Nft[]>([]);
+
+  const refetch = useCallback(async () => {
+    if (!tokenIds)
+      return;
+
+    const arr: Nft[] = [];
+    for (let i = 0; i < tokenIds.length; i++) {
+      const dataURI = await nftContract?.read.tokenURI([tokenIds[i]]);
+
+      const data = Buffer.from(dataURI.substring(27), "utf-8").toString();
+      const json = JSON.parse(data);
+      json["id"] = tokenIds[i];
+      arr.push(json);
+    }
+
+    setData([...arr]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [nftContract?.address, tokenIds]);
+
+  useEffect(() => {
+    refetch();
+  }, [refetch]);
+
+  return { data, refetch };
+}
+
+export function useReadApproves(nftContract: any, tokenIds: number[]) {
+  const [data, setData] = useState<string[]>([]);
+
+  const refetch = useCallback(async () => {
+    if (tokenIds === undefined) return;
+
+    const arr: string[] = [];
+    for (let i = 0; i < tokenIds.length; i++) {
+      const _value = await nftContract?.read.getApproved([BigInt(tokenIds[i])]);
+      arr.push(_value);
+    }
+
+    setData([...arr]);
+  }, [nftContract, tokenIds]);
+
+  useEffect(() => {
+    refetch();
+  }, [tokenIds, refetch]);
+
+  return { data, refetch };
 }
