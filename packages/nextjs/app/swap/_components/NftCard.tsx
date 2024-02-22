@@ -24,10 +24,10 @@ export const NftCard = (props: NftCardProps) => {
         }}
         className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
       >
-        {props.buttonText}{" "}
+        {props.buttonText}
       </button>
       <p>{props.nft.name}</p>
-      <p className="-m-2">Token ID: {props.nft.id}</p>
+      <p className="-m-2">Token ID: {props.nft.id.toString()}</p>
       {attributesOutput}
       {props?.nft?.image ? (
         <img src={props?.nft?.image.replace("ipfs://", "https://ipfs.io/ipfs/")} width={128} height={128} />
