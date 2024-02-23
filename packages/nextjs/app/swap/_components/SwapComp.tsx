@@ -1,10 +1,14 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { useReadApproves, useReadOwnerOfsDumpsterDivers, useReadOwnerOfsTrash } from "../../../components/hooks";
 import { useReadTokenURIsUTF8 } from "../../../components/hooks";
 import { NftCard } from "./NftCard";
 import { useAccount } from "wagmi";
 import { useScaffoldContract, useScaffoldContractRead, useScaffoldContractWrite } from "~~/hooks/scaffold-eth";
+import { Nft } from "~~/components/types";
+import { Balance } from "~~/components/scaffold-eth";
+
 
 export function SwapComp() {
   const account = useAccount();
@@ -42,6 +46,8 @@ export function SwapComp() {
 
   const { writeAsync: mintDumpsterDiver } = useScaffoldContractWrite({contractName: "DumpsterBin", functionName: "mint", args: [BigInt(0)]});
 
+  const { data: weeFee } = useScaffoldContractRead({contractName: "DumpsterBin", functionName: "getWeeFee"});
+
   async function refreshPageData() {
     await getOwnerOfs();
     await getVaultOwnerOfs();
@@ -63,34 +69,154 @@ export function SwapComp() {
     <NftCard key={"vault-" + index} buttonText="" nft={json} />
   ));
 
+  const [greensToTransfer, setGreensToTransfer] = useState(0);
+  const [yellowsToTransfer, setYellowsToTransfer] = useState(0);
+  const [greysToTransfer, setGreysToTransfer] = useState(0);
+  const [bluesToTransfer, setBluesToTransfer] = useState(0);
+  const [pinksToTransfer, setPinksToTransfer] = useState(0);
+
+  const [greens, setGreens] = useState<Nft[]>([]);
+  const [yellows, setYellows] = useState<Nft[]>([]);
+  const [greys, setGreys] = useState<Nft[]>([]);
+  const [blues, setBlues] = useState<Nft[]>([]);
+  const [pinks, setPinks] = useState<Nft[]>([]);
+
+  useEffect(()=> {
+    let greensArr = [];
+    let yellowsArr = [];
+    let bluesArr = [];
+    let pinksArr = [];
+    let greysArr = [];
+
+    for (let i = 0; i < jsons.length; i++) {
+      for (let j = 0; j < jsons[i].attributes.length; j++) {
+          if (jsons[i].attributes[j].value === "Green") {
+              greensArr.push(jsons[i]);
+          } else if (jsons[i].attributes[j].value === "Yellow") {
+              yellowsArr.push(jsons[i]);
+          } else if (jsons[i].attributes[j].value === "Blue") {
+            bluesArr.push(jsons[i]);
+          } else if (jsons[i].attributes[j].value === "Grey") {
+            greysArr.push(jsons[i]);
+          } else if (jsons[i].attributes[j].value === "Pink") {
+            pinksArr.push(jsons[i]);
+          }
+      }
+    }
+
+    setGreens([...greensArr]);
+    setYellows([...yellowsArr]);
+    setGreys([...greysArr]);
+    setBlues([...bluesArr]);
+    setPinks([...pinksArr]);
+  }, [jsons])
+  
+
+
+
+  console.log(greens);
+  console.log(yellows);
+
   const dumpsterDiversNfts = jsonsOfOwnedDumpsterDiversOfWallet.map((json, index) => (
     <NftCard
       key={"dumpsterDivers-" + index}
       buttonText="Burn"
       nft={json}
       onClaimed={async () => {
-        await burn({ args: [BigInt(json.id)] });
+        await burn({ args: [BigInt(json.id)], value: weeFee });
         refreshPageData();
       }}
     />
   ));
 
-  console.log("hello");
-
   return (
     <>
       <div className="mt-8 bg-secondary p-10">
-        <h1 className="text-4xl my-0">Swap</h1>
-
-        <p>Your Dumpster Divers</p>
+        <p className="text-4xl">Your Dumpster Divers</p>
         <div className="grid grid-cols-5"> { dumpsterDiversNfts } </div>
-        <p>Your Trash</p>
-        <button onClick={async ()=> { await faucet(); refreshPageData() }} className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">Mint 1 Trash from faucet (This is testnet only functionality)</button>
+        <p className="text-4xl">Your Trash</p>
+        <button onClick={async ()=> { await faucet(); refreshPageData() }} className="bg-transparent hover:bg-blue-500 text-white-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">Mint 1 Trash from faucet (This is testnet only functionality)</button>
+        
+        
+        
+        <div className="flex space-x-2">
+        <button onClick={()=> { setGreensToTransfer(greensToTransfer - 1 > 0 ? greensToTransfer - 1 : 0)}} className="bg-transparent hover:bg-blue-500 text-white-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">{"<"}</button>
+        <button onClick={()=> { setGreensToTransfer( greensToTransfer + 1 <= greens.length ? greensToTransfer + 1 : greens.length)}} className="bg-transparent hover:bg-blue-500 text-white-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">{">"}</button>
+        <p>Greens To Transfer: {greensToTransfer} </p>
+        <button onClick={async ()=> {
+            for (let i = 0;i < greensToTransfer; i++) {
+              await setApprovalForAll({args: [vaultContract?.address, BigInt(greens[i].id)]}); await refreshPageData()
+              await mintDumpsterDiver({args: [BigInt(greens[i].id)]})
+              refreshPageData()
+            }
+        }} className="bg-transparent hover:bg-blue-500 text-white-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">Transfer</button>
+        </div>
+
+        <div className="flex space-x-2">
+
+        <button onClick={()=> { setYellowsToTransfer(yellowsToTransfer - 1 > 0 ? yellowsToTransfer - 1 : 0)}} className="bg-transparent hover:bg-blue-500 text-white-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">{"<"}</button>
+        <button onClick={()=> { setYellowsToTransfer( yellowsToTransfer + 1 <= yellows.length ? yellowsToTransfer + 1 : yellows.length)}} className="bg-transparent hover:bg-blue-500 text-white-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">{">"}</button>
+        <p>Yellows To Transfer: {yellowsToTransfer} </p>
+        <button onClick={async ()=> {
+            for (let i = 0;i < yellowsToTransfer; i++) {
+              await setApprovalForAll({args: [vaultContract?.address, BigInt(yellows[i].id)]}); await refreshPageData()
+              await mintDumpsterDiver({args: [BigInt(yellows[i].id)]})
+              refreshPageData()
+            }
+        }} className="bg-transparent hover:bg-blue-500 text-white-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">Transfer</button>
+        </div>
+
+        <div className="flex space-x-2">
+        <button onClick={()=> { setGreysToTransfer(greysToTransfer - 1 > 0 ? greysToTransfer - 1 : 0)}} className="bg-transparent hover:bg-blue-500 text-white-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">{"<"}</button>
+        <button onClick={()=> { setGreysToTransfer( greysToTransfer + 1 <= greys.length ? greysToTransfer + 1 : greys.length)}} className="bg-transparent hover:bg-blue-500 text-white-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">{">"}</button>
+        <p>Greys To Transfer: {greysToTransfer} </p>
+        <button onClick={async ()=> {
+            for (let i = 0;i < greysToTransfer; i++) {
+              await setApprovalForAll({args: [vaultContract?.address, BigInt(greys[i].id)]}); await refreshPageData()
+              await mintDumpsterDiver({args: [BigInt(greys[i].id)]})
+              refreshPageData()
+            }
+        }} className="bg-transparent hover:bg-blue-500 text-white-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">Transfer</button>
+        </div>
+        
+        <div className="flex space-x-2">
+        <button onClick={()=> { setPinksToTransfer(pinksToTransfer - 1 > 0 ? pinksToTransfer - 1 : 0)}} className="bg-transparent hover:bg-blue-500 text-white-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">{"<"}</button>
+        <button onClick={()=> { setPinksToTransfer( pinksToTransfer + 1 <= pinks.length ? pinksToTransfer + 1 : pinks.length)}} className="bg-transparent hover:bg-blue-500 text-white-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">{">"}</button>
+        <p>Pinks To Transfer: {pinksToTransfer} </p>
+        <button onClick={async ()=> {
+            for (let i = 0;i < pinksToTransfer; i++) {
+              await setApprovalForAll({args: [vaultContract?.address, BigInt(pinks[i].id)]}); await refreshPageData()
+              await mintDumpsterDiver({args: [BigInt(pinks[i].id)]})
+              refreshPageData()
+            }
+        }} className="bg-transparent hover:bg-blue-500 text-white-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">Transfer</button>
+        </div>
+        <div className="flex space-x-2">
+        <button onClick={()=> { setBluesToTransfer(bluesToTransfer - 1 > 0 ? bluesToTransfer - 1 : 0)}} className="bg-transparent hover:bg-blue-500 text-white-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">{"<"}</button>
+        <button onClick={()=> { setBluesToTransfer( bluesToTransfer + 1 <= blues.length ? bluesToTransfer + 1 : blues.length)}} className="bg-transparent hover:bg-blue-500 text-white-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">{">"}</button>
+        <p>Blues To Transfer: {bluesToTransfer} </p>
+        <button onClick={async ()=> {
+            for (let i = 0;i < bluesToTransfer; i++) {
+              await setApprovalForAll({args: [vaultContract?.address, BigInt(blues[i].id)]}); await refreshPageData()
+              await mintDumpsterDiver({args: [BigInt(blues[i].id)]})
+              refreshPageData()
+            }
+        }} className="bg-transparent hover:bg-blue-500 text-white-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">Transfer</button>
+        </div>
+
+
+        
+        <br/>
+        <br/>
         <div className="grid grid-cols-5">
         { nfts }
         </div>
         
-        <p>Vaults Trash</p>
+        <p className="text-4xl">Vaults Trash</p>
+        <Balance address={vaultContract?.address} />
+
+
+
         <div className="grid grid-cols-5">
         { vaultsNfts }
         </div>

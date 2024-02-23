@@ -6,10 +6,12 @@ import {Trash} from "./Trash.sol";
 import {Ownable} from "@openzeppelin/contracts/access/Ownable.sol";
 
 contract DumpsterBin is Ownable {
-    error DUMPSTER_BIN__NOT_OWNER();
+    error DUMPSTER_BIN__DID_NOT_PROVIDE_WEE_FEE();
 
     Trash s_trash;
     DumpsterDivers s_dumpsterDivers;
+
+    uint256 weeFee;
 
     constructor(
         address newOwner,
@@ -18,6 +20,7 @@ contract DumpsterBin is Ownable {
     ) Ownable(newOwner) {
         s_trash = Trash(trash);
         s_dumpsterDivers = DumpsterDivers(dumpsterDivers);
+        weeFee = 0.042069 ether;
     }
 
     function mintBatch(uint256[] memory tokenIds) external {
@@ -31,7 +34,11 @@ contract DumpsterBin is Ownable {
         s_dumpsterDivers.mint(msg.sender, tokenId);
     }
 
-    function burn(uint256 tokenId) public {
+    function burn(uint256 tokenId) public payable {
+        if (msg.value < getWeeFee()) {
+            revert DUMPSTER_BIN__DID_NOT_PROVIDE_WEE_FEE();
+        }
+
         s_dumpsterDivers.burn(tokenId);
 
         uint256 originalId = s_dumpsterDivers.originalTokenIds(tokenId);
@@ -43,5 +50,18 @@ contract DumpsterBin is Ownable {
         for (uint256 i = 0; i < tokenIds.length; i++) {
             burn(tokenIds[i]);
         }
+    }
+
+    function getWeeFee() public view returns (uint256) {
+        return weeFee;
+    }
+
+    function setWeeFee(uint256 value) external onlyOwner {
+        weeFee = value;
+    }
+
+    function withdrawWeeFees(address recipient) external payable onlyOwner {
+        (bool sent, ) = recipient.call{value: address(this).balance}("");
+        require(sent, "Failed to send Ether");
     }
 }

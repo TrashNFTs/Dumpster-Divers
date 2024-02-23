@@ -2799,7 +2799,7 @@ const deployedContracts = {
             },
           ],
           outputs: [],
-          stateMutability: "nonpayable",
+          stateMutability: "payable",
         },
         {
           type: "function",
@@ -2813,6 +2813,19 @@ const deployedContracts = {
           ],
           outputs: [],
           stateMutability: "nonpayable",
+        },
+        {
+          type: "function",
+          name: "getWeeFee",
+          inputs: [],
+          outputs: [
+            {
+              name: "",
+              type: "uint256",
+              internalType: "uint256",
+            },
+          ],
+          stateMutability: "view",
         },
         {
           type: "function",
@@ -2862,6 +2875,19 @@ const deployedContracts = {
         },
         {
           type: "function",
+          name: "setWeeFee",
+          inputs: [
+            {
+              name: "value",
+              type: "uint256",
+              internalType: "uint256",
+            },
+          ],
+          outputs: [],
+          stateMutability: "nonpayable",
+        },
+        {
+          type: "function",
           name: "transferOwnership",
           inputs: [
             {
@@ -2872,6 +2898,19 @@ const deployedContracts = {
           ],
           outputs: [],
           stateMutability: "nonpayable",
+        },
+        {
+          type: "function",
+          name: "withdrawWeeFees",
+          inputs: [
+            {
+              name: "recipient",
+              type: "address",
+              internalType: "address",
+            },
+          ],
+          outputs: [],
+          stateMutability: "payable",
         },
         {
           type: "event",
@@ -2894,7 +2933,7 @@ const deployedContracts = {
         },
         {
           type: "error",
-          name: "DUMPSTER_BIN__NOT_OWNER",
+          name: "DUMPSTER_BIN__DID_NOT_PROVIDE_WEE_FEE",
           inputs: [],
         },
         {
@@ -3627,7 +3666,7 @@ const deployedContracts = {
   },
   11155111: {
     Trash: {
-      address: "0xbf1483DC33187d1e8A26F04FaC0c631428b0C2ff",
+      address: "0x7c5B92E478CEDd0c39F984f014b688432ABff51d",
       abi: [
         {
           type: "constructor",
@@ -4321,7 +4360,7 @@ const deployedContracts = {
       },
     },
     DumpsterDivers: {
-      address: "0x564392ed3f84DF1Ca513a6F486c3a102A0d03ef7",
+      address: "0x2bB77e453ae57C4A3EbdeD59805eb02BCCabD355",
       abi: [
         {
           type: "constructor",
@@ -4993,7 +5032,7 @@ const deployedContracts = {
       },
     },
     DumpsterBin: {
-      address: "0x2bA4595280606668e94f2B6f9c9E31d7a4537153",
+      address: "0x055267817Cc45db834027Ba5b3B72C3378163A45",
       abi: [
         {
           type: "constructor",
@@ -5027,7 +5066,7 @@ const deployedContracts = {
             },
           ],
           outputs: [],
-          stateMutability: "nonpayable",
+          stateMutability: "payable",
         },
         {
           type: "function",
@@ -5041,6 +5080,19 @@ const deployedContracts = {
           ],
           outputs: [],
           stateMutability: "nonpayable",
+        },
+        {
+          type: "function",
+          name: "getWeeFee",
+          inputs: [],
+          outputs: [
+            {
+              name: "",
+              type: "uint256",
+              internalType: "uint256",
+            },
+          ],
+          stateMutability: "view",
         },
         {
           type: "function",
@@ -5090,6 +5142,19 @@ const deployedContracts = {
         },
         {
           type: "function",
+          name: "setWeeFee",
+          inputs: [
+            {
+              name: "value",
+              type: "uint256",
+              internalType: "uint256",
+            },
+          ],
+          outputs: [],
+          stateMutability: "nonpayable",
+        },
+        {
+          type: "function",
           name: "transferOwnership",
           inputs: [
             {
@@ -5100,6 +5165,19 @@ const deployedContracts = {
           ],
           outputs: [],
           stateMutability: "nonpayable",
+        },
+        {
+          type: "function",
+          name: "withdrawWeeFees",
+          inputs: [
+            {
+              name: "recipient",
+              type: "address",
+              internalType: "address",
+            },
+          ],
+          outputs: [],
+          stateMutability: "payable",
         },
         {
           type: "event",
@@ -5122,7 +5200,7 @@ const deployedContracts = {
         },
         {
           type: "error",
-          name: "DUMPSTER_BIN__NOT_OWNER",
+          name: "DUMPSTER_BIN__DID_NOT_PROVIDE_WEE_FEE",
           inputs: [],
         },
         {
