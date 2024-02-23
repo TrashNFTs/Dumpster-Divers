@@ -82,11 +82,11 @@ export function SwapComp() {
   const [pinks, setPinks] = useState<Nft[]>([]);
 
   useEffect(()=> {
-    let greensArr = [];
-    let yellowsArr = [];
-    let bluesArr = [];
-    let pinksArr = [];
-    let greysArr = [];
+    const greensArr = [];
+    const yellowsArr = [];
+    const bluesArr = [];
+    const pinksArr = [];
+    const greysArr = [];
 
     for (let i = 0; i < jsons.length; i++) {
       for (let j = 0; j < jsons[i].attributes.length; j++) {

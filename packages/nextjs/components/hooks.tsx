@@ -35,7 +35,7 @@ export function useReadOwnerOfsDumpsterDivers(
 
 export function useReadOwnerOfsTrash(
   accountAddress: string | undefined,
-  mintCount: BigInt | undefined,
+  mintCount: bigint | undefined,
   trashContract: any | undefined,
 ) {
   const [data, setData] = useState<bigint[]>([]);
@@ -91,7 +91,7 @@ export function useReadTokenURIsUTF8(nftContract: any | undefined, tokenIds: big
   return { data, refetch };
 }
 
-export function useReadApproves(nftContract: any, tokenIds: BigInt[]) {
+export function useReadApproves(nftContract: any, tokenIds: bigint[]) {
   const [data, setData] = useState<string[]>([]);
 
   const refetch = useCallback(async () => {
