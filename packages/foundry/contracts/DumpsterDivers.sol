@@ -108,12 +108,7 @@ contract DumpsterDivers is Ownable, ERC721 {
 
         uint256 rn = generateRandomNumber(rarityOffset, 10000);
 
-        string memory baseURI = _baseURI();
-
-        return
-            bytes(baseURI).length > 0
-                ? string.concat(baseURI, Strings.toString(rn))
-                : "";
+        return string.concat(selectedBaseURI, Strings.toString(rn));
 
         // string memory jsonPreImage = string.concat(
         //     string.concat(
