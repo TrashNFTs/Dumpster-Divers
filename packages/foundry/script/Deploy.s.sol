@@ -31,7 +31,10 @@ contract DeployScript is ScaffoldETHDeploy {
             "ipfs://bafybeiclqcx3kdoauwelxgcny25wauci6qqonfigid6y2wrv4ep4gji3gq/"
         );
 
-        dumpsterDivers = new DumpsterDivers(deployerPubKey);
+        dumpsterDivers = new DumpsterDivers(
+            deployerPubKey,
+            "ipfs://bafybeihsdxwav2mcfdorxzwgt6bb3thpdra44wjzlcl3slcsdai75grwzi/"
+        );
         dumpsterBin = new DumpsterBin(
             deployerPubKey,
             address(trash),

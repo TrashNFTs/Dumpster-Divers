@@ -67,8 +67,7 @@ export function useReadTokenURIsUTF8(nftContract: any | undefined, tokenIds: big
   const [data, setData] = useState<Nft[]>([]);
 
   const refetch = useCallback(async () => {
-    if (!tokenIds)
-      return;
+    if (!tokenIds) return;
 
     const arr: Nft[] = [];
     for (let i = 0; i < tokenIds.length; i++) {
@@ -76,6 +75,36 @@ export function useReadTokenURIsUTF8(nftContract: any | undefined, tokenIds: big
 
       const data = Buffer.from(dataURI.substring(27), "utf-8").toString();
       const json = JSON.parse(data);
+      json["id"] = tokenIds[i];
+      arr.push(json);
+    }
+
+    setData([...arr]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [nftContract?.address, tokenIds]);
+
+  useEffect(() => {
+    refetch();
+  }, [refetch]);
+
+  return { data, refetch };
+}
+
+export function useReadTokenURIs(nftContract: any | undefined, tokenIds: bigint[] | undefined) {
+  const [data, setData] = useState<Nft[]>([]);
+
+  const refetch = useCallback(async () => {
+    if (!tokenIds) return;
+
+    const arr: Nft[] = [];
+    for (let i = 0; i < tokenIds.length; i++) {
+      let dataURI = await nftContract?.read.tokenURI([tokenIds[i]]);
+      dataURI = dataURI.replace("ipfs://", "ipfs.io/ipfs/");
+      console.log(dataURI);
+
+      const q = await fetch(dataURI);
+
+      const json = await q.json();
       json["id"] = tokenIds[i];
       arr.push(json);
     }

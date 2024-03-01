@@ -20,7 +20,7 @@ contract YourContractTest is Test {
 
         vm.startPrank(deployer);
         trash = new Trash(deployer);
-        dumpsterDivers = new DumpsterDivers(deployer);
+        dumpsterDivers = new DumpsterDivers(deployer, "");
         dumpsterBin = new DumpsterBin(
             deployer,
             address(trash),
@@ -35,11 +35,6 @@ contract YourContractTest is Test {
         uint256 rarityOffset,
         uint256 seed
     ) public view returns (uint256) {
-        // uint256 offset = 0;
-        // for (uint256 i = 0; i <= rarityOffset; i++) {
-        //     offset += 20000;
-        // }
-
         uint256 blockNumber = block.number - rarityOffset; // Use the previous block's hash
         bytes32 blockHash = blockhash(blockNumber);
         return (uint256(blockHash) % seed) + (rarityOffset * 10000);
