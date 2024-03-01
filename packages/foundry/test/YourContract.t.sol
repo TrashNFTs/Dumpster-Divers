@@ -42,66 +42,66 @@ contract YourContractTest is Test {
 
         uint256 blockNumber = block.number - rarityOffset; // Use the previous block's hash
         bytes32 blockHash = blockhash(blockNumber);
-        return (uint256(blockHash) % seed) + (rarityOffset * 20000);
+        return (uint256(blockHash) % seed) + (rarityOffset * 10000);
     }
 
     function testMe(uint256 bn) external {
-        vm.assume(bn > 100000);
+        vm.assume(bn > 1000000);
 
         vm.warp(1641070800);
         vm.roll(bn);
 
-        for (uint256 i = 0; i < 20000; i++) {
-            uint256 rn = generateRandomNumber(0, 20000);
-            assertEq(rn < 20000, true);
+        for (uint256 i = 0; i < 10000; i++) {
+            uint256 rn = generateRandomNumber(0, 10000);
+            assertEq(rn < 10000, true);
         }
     }
 
     function testMe2(uint256 bn) external {
-        vm.assume(bn > 100000);
+        vm.assume(bn > 1000000);
 
         vm.warp(1641070800);
         vm.roll(bn);
 
-        for (uint256 i = 0; i < 20000; i++) {
-            uint256 rn = generateRandomNumber(1, 20000);
-            assertEq(rn >= 20000 && rn < 40000, true);
+        for (uint256 i = 0; i < 10000; i++) {
+            uint256 rn = generateRandomNumber(1, 10000);
+            assertEq(rn >= 10000 && rn < 20000, true);
         }
     }
 
     function testMe3(uint256 bn) external {
-        vm.assume(bn > 100000);
+        vm.assume(bn > 1000000);
 
         vm.warp(1641070800);
         vm.roll(bn);
 
-        for (uint256 i = 0; i < 20000; i++) {
-            uint256 rn = generateRandomNumber(2, 20000);
-            assertEq(rn >= 40000 && rn < 60000, true);
+        for (uint256 i = 0; i < 10000; i++) {
+            uint256 rn = generateRandomNumber(2, 10000);
+            assertEq(rn >= 20000 && rn < 30000, true);
         }
     }
 
     function testMe4(uint256 bn) external {
-        vm.assume(bn > 100000);
+        vm.assume(bn > 1000000);
 
         vm.warp(1641070800);
         vm.roll(bn);
 
-        for (uint256 i = 0; i < 20000; i++) {
-            uint256 rn = generateRandomNumber(3, 20000);
-            assertEq(rn >= 60000 && rn < 80000, true);
+        for (uint256 i = 0; i < 10000; i++) {
+            uint256 rn = generateRandomNumber(3, 10000);
+            assertEq(rn >= 30000 && rn < 40000, true);
         }
     }
 
     function testMe5(uint256 bn) external {
-        vm.assume(bn > 100000);
+        vm.assume(bn > 1000000);
 
         vm.warp(1641070800);
         vm.roll(bn);
 
-        for (uint256 i = 0; i < 20000; i++) {
-            uint256 rn = generateRandomNumber(4, 20000);
-            assertEq(rn >= 80000 && rn < 100000, true);
+        for (uint256 i = 0; i < 10000; i++) {
+            uint256 rn = generateRandomNumber(4, 10000);
+            assertEq(rn >= 40000 && rn < 50000, true);
         }
     }
 
