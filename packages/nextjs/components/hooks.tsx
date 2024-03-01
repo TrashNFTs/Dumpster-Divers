@@ -99,7 +99,7 @@ export function useReadTokenURIs(nftContract: any | undefined, tokenIds: bigint[
     const arr: Nft[] = [];
     for (let i = 0; i < tokenIds.length; i++) {
       let dataURI = await nftContract?.read.tokenURI([tokenIds[i]]);
-      dataURI = dataURI.replace("ipfs://", "ipfs.io/ipfs/");
+      dataURI = dataURI.replace("ipfs://", "https://ipfs.io/ipfs/");
       console.log(dataURI);
 
       const q = await fetch(dataURI);

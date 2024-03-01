@@ -20,7 +20,7 @@ contract YourContractTest is Test {
 
         vm.startPrank(deployer);
         trash = new Trash(deployer);
-        dumpsterDivers = new DumpsterDivers(deployer, "");
+        dumpsterDivers = new DumpsterDivers(deployer);
         dumpsterBin = new DumpsterBin(
             deployer,
             address(trash),

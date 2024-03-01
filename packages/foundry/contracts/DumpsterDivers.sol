@@ -11,26 +11,16 @@ contract DumpsterDivers is Ownable, ERC721 {
 
     uint256 mintCount;
 
-    string s_baseURI_0;
+    string s_baseURI_0 =
+        "ipfs://bafybeihnzaewtxmc5zkrxyt36l4d2coy47tvoh26a2n6s5taqget4t7zda/";
     string s_baseURI_1;
     string s_baseURI_2;
     string s_baseURI_3;
     string s_baseURI_4;
 
     constructor(
-        address newOwner,
-        string memory baseImageURI_0,
-        string memory baseImageURI_1,
-        string memory baseImageURI_2,
-        string memory baseImageURI_3,
-        string memory baseImageURI_4
-    ) ERC721("Dumpster Divers", "DD") Ownable(newOwner) {
-        s_baseURI_0 = baseImageURI_0;
-        s_baseURI_1 = baseImageURI_1;
-        s_baseURI_2 = baseImageURI_2;
-        s_baseURI_3 = baseImageURI_3;
-        s_baseURI_4 = baseImageURI_4;
-    }
+        address newOwner
+    ) ERC721("Dumpster Divers", "DD") Ownable(newOwner) {}
 
     mapping(uint256 tokenId => uint256 originalTokenId) public originalTokenIds;
 
@@ -109,28 +99,5 @@ contract DumpsterDivers is Ownable, ERC721 {
         uint256 rn = generateRandomNumber(rarityOffset, 10000);
 
         return string.concat(selectedBaseURI, Strings.toString(rn));
-
-        // string memory jsonPreImage = string.concat(
-        //     string.concat(
-        //         string.concat(string.concat('{"name": "', name), ' Reveal"'),
-        //         ',"description":"A Test description","external_url":"https://trashnfts.com"'
-        //     )
-        // );
-
-        // string memory jsonPostImage = string.concat(
-        //     string.concat(jsonPreImage, '"image": "'),
-        //     string.concat(
-        //         s_baseImageURI,
-        //         Strings.toString(generateRandomNumber(rarityOffset, 10000))
-        //     )
-        // );
-
-        // string memory jsonPostTraits = "}";
-
-        // return
-        //     string.concat(
-        //         "data:application/json;utf8,",
-        //         string.concat(jsonPostImage, jsonPostTraits)
-        //     );
     }
 }

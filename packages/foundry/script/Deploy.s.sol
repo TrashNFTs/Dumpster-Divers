@@ -14,6 +14,8 @@ contract DeployScript is ScaffoldETHDeploy {
     DumpsterDivers dumpsterDivers;
     DumpsterBin dumpsterBin;
 
+    address trashDaoAddress = 0x6191Ffa327e115A4F6cA09a6CF5De05A6f8DeE96;
+
     function run() external {
         uint256 deployerPrivateKey = setupLocalhostEnv();
         if (deployerPrivateKey == 0) {
@@ -31,10 +33,7 @@ contract DeployScript is ScaffoldETHDeploy {
             "ipfs://bafybeiclqcx3kdoauwelxgcny25wauci6qqonfigid6y2wrv4ep4gji3gq/"
         );
 
-        dumpsterDivers = new DumpsterDivers(
-            deployerPubKey,
-            "ipfs://bafybeihsdxwav2mcfdorxzwgt6bb3thpdra44wjzlcl3slcsdai75grwzi/"
-        );
+        dumpsterDivers = new DumpsterDivers(deployerPubKey);
         dumpsterBin = new DumpsterBin(
             deployerPubKey,
             address(trash),
