@@ -12,6 +12,7 @@ import { NftCard } from "./NftCard";
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import { useAccount } from "wagmi";
+import { FaucetButton, RainbowKitCustomConnectButton } from "~~/components/scaffold-eth";
 //import { Balance } from "~~/components/scaffold-eth";
 import { Nft } from "~~/components/types";
 import { useScaffoldContract, useScaffoldContractRead, useScaffoldContractWrite } from "~~/hooks/scaffold-eth";
@@ -160,18 +161,22 @@ export function SwapComp() {
 
   return (
     <>
-      <div className="bg-header bg-top bg-cover">
-        <div className="mt-96 p-10">
+      <div className="absolute top-20 right-20 flex z-10">
+        <RainbowKitCustomConnectButton />
+        <FaucetButton />
+      </div>
+      <div className="bg-header bg-top bg-no-repeat bg-contain">
+        <div className="lg:mt-96 mt-32 p-10">
           <Tabs
             selectedIndex={tabIndex}
             onSelect={index => setTabIndex(index)}
             selectedTabClassName="bg-black text-white"
           >
-            <TabList className="flex m-20">
-              <Tab className="cursor-pointer ml-20 mr-20 py-4 px-8 bg-grey rounded-full border flex-1">
+            <TabList className="flex lg:m-20 bg-white">
+              <Tab className="cursor-pointer lg:ml-20 lg:mr-20 py-4 px-8 rounded-full border flex-1">
                 <h2 className="w-full text-2xl text-center">TRASH</h2>
               </Tab>
-              <Tab className="cursor-pointer ml-20 mr-20 py-4 px-8 bg-grey rounded-full border flex-1">
+              <Tab className="cursor-pointer lg:ml-20 lg:mr-20 py-4 px-8 rounded-full border flex-1">
                 <h2 className="w-full text-2xl text-center">DIVERS</h2>
               </Tab>
             </TabList>
