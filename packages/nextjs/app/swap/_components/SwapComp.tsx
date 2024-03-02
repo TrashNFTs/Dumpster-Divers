@@ -232,7 +232,7 @@ export function SwapComp() {
                       <div className="relative w-40 h-40 overflow-hidden">
                         <img src={blue.src} alt="BlueTrash" className="object-cover w-full h-full" />
                         <div className="absolute w-full py-2.5 bottom-0 inset-x-0 bg-sky-500/50 text-white text-xs text-center leading-4">
-                          {greysToTransfer} / {greys.length}
+                          {bluesToTransfer} / {blues.length}
                         </div>
                       </div>
 
@@ -259,7 +259,7 @@ export function SwapComp() {
                       <div className="relative w-40 h-40 overflow-hidden">
                         <img src={green.src} alt="GreenTrash" className="object-cover w-full h-full" />
                         <div className="absolute w-full py-2.5 bottom-0 inset-x-0 bg-green-500/50 text-white text-xs text-center leading-4">
-                          {greysToTransfer} / {greys.length}
+                          {greensToTransfer} / {greens.length}
                         </div>
                       </div>
 
@@ -288,7 +288,7 @@ export function SwapComp() {
                       <div className="relative w-40 h-40 overflow-hidden">
                         <img src={yellow.src} alt="YellowTrash" className="object-cover w-full h-full" />
                         <div className="absolute w-full py-2.5 bottom-0 inset-x-0 bg-yellow-500/50 text-white text-xs text-center leading-4">
-                          {greysToTransfer} / {greys.length}
+                          {yellowsToTransfer} / {yellows.length}
                         </div>
                       </div>
 
@@ -317,7 +317,7 @@ export function SwapComp() {
                       <div className="relative w-40 h-40 overflow-hidden">
                         <img src={pink.src} alt="PinkTrash" className="object-cover w-full h-full" />
                         <div className="absolute w-full py-2.5 bottom-0 inset-x-0 bg-pink-500/50 text-white text-xs text-center leading-4">
-                          {greysToTransfer} / {greys.length}
+                          {pinksToTransfer} / {pinks.length}
                         </div>
                       </div>
 

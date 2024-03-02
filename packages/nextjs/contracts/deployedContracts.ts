@@ -1399,7 +1399,7 @@ const deployedContracts = {
   },
   31337: {
     Trash: {
-      address: "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+      address: "0x4ed7c70F96B99c776995fB64377f0d4aB3B0e1C1",
       abi: [
         {
           type: "constructor",
@@ -2093,7 +2093,7 @@ const deployedContracts = {
       },
     },
     DumpsterDivers: {
-      address: "0x610178dA211FEF7D417bC0e6FeD39F05609AD788",
+      address: "0x4A679253410272dd5232B3Ff7cF5dbB88f295319",
       abi: [
         {
           type: "constructor",
@@ -2744,7 +2744,7 @@ const deployedContracts = {
       },
     },
     DumpsterBin: {
-      address: "0xB7f8BC63BbcaD18155201308C8f3540b07f84F5e",
+      address: "0x7a2088a1bFc9d81c55368AE168C2C02570cB814F",
       abi: [
         {
           type: "constructor",
@@ -3643,7 +3643,7 @@ const deployedContracts = {
   },
   11155111: {
     Trash: {
-      address: "0x7c5B92E478CEDd0c39F984f014b688432ABff51d",
+      address: "0x75f871257163bF5457a73A132fa36357867F808b",
       abi: [
         {
           type: "constructor",
@@ -4337,7 +4337,7 @@ const deployedContracts = {
       },
     },
     DumpsterDivers: {
-      address: "0x2bB77e453ae57C4A3EbdeD59805eb02BCCabD355",
+      address: "0xc7c49EddAAFBEc5662ab0bb0CFCB5cf0e3Fd3575",
       abi: [
         {
           type: "constructor",
@@ -4988,7 +4988,7 @@ const deployedContracts = {
       },
     },
     DumpsterBin: {
-      address: "0x055267817Cc45db834027Ba5b3B72C3378163A45",
+      address: "0xD3EACbc2686fDA3acd4CAa90A76923838C95D90A",
       abi: [
         {
           type: "constructor",

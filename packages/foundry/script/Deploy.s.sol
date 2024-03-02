@@ -48,9 +48,15 @@ contract DeployScript is ScaffoldETHDeploy {
         // );
 
         trash.transfer(
-            0x1BA8ba8596c676f0bEAC8618Daeb791c253Dd210,
-            10 * 10 ** 18
+            0x3bEc6a181d6Ef7239F699DAf2fAa5FE3A5f01Edf,
+            20 * 10 ** 18
         );
+
+        trash.transfer(
+            0x51603C7059f369aB04B16AddFB7BB6c4e34b8523,
+            20 * 10 ** 18
+        );
+
         vm.stopBroadcast();
 
         /**
