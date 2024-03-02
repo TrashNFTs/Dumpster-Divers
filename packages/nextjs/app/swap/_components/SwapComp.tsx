@@ -185,7 +185,7 @@ export function SwapComp() {
               <div className="lg:flex m-top bg-transparent">
                 <div className="lg:flex-1 m-10">
                   <h1 className="text-3xl text-center">BAG</h1>
-                  <div className="grid grid-cols-5"> {dumpsterDiversNfts} </div>
+                  <div className="grid grid-cols-5">{nfts}</div>
                 </div>
 
                 <div className="flex-1 m-10">
@@ -376,7 +376,7 @@ export function SwapComp() {
               </div>
             </TabPanel>
             <TabPanel>
-              <div className="grid grid-cols-5">{nfts}</div>
+              <div className="grid grid-cols-5"> {dumpsterDiversNfts} </div>
             </TabPanel>
           </Tabs>
         </div>
