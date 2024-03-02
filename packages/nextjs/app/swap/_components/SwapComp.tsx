@@ -203,7 +203,7 @@ export function SwapComp() {
                   <h1 className="text-3xl text-center">DUMPSTER DEPOSIT</h1>
                   <p className="text-center">
                     When you stash your $TRASH in the Dumpster, a Dumpster Diver is born. <br />
-                    Rare trash has attracts more exclusive Dumpster Divers.
+                    Rare trash attracts more exclusive Dumpster Divers.
                   </p>
 
                   <div className="lg:grid lg:grid-cols-2">
