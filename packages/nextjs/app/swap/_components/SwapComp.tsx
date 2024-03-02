@@ -185,11 +185,26 @@ export function SwapComp() {
               <div className="lg:flex m-top bg-transparent">
                 <div className="lg:flex-1 m-10">
                   <h1 className="text-3xl text-center">BAG</h1>
+                  <p className="text-center">
+                    Minting a Dumpster Diver costs 1 $TRASH. <br />
+                    You can buy $TRASH with ETH or DEGEN on{" "}
+                    <a
+                      href="https://app.uniswap.org/explore/tokens/base/0xdf00fde26a6819507649904ca52fe5062ef75ba7"
+                      className="underline text-blue-600 hover:text-blue-800 visited:text-purple-600"
+                    >
+                      Uniswap
+                    </a>
+                    .
+                  </p>
                   <div className="grid grid-cols-5">{nfts}</div>
                 </div>
 
                 <div className="flex-1 m-10">
                   <h1 className="text-3xl text-center">DUMPSTER DEPOSIT</h1>
+                  <p className="text-center">
+                    When you stash your $TRASH in the Dumpster, a Dumpster Diver is born. <br />
+                    Rare trash has attracts more exclusive Dumpster Divers.
+                  </p>
 
                   <div className="lg:grid lg:grid-cols-2">
                     <div className="flex m-5">
