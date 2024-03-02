@@ -37,7 +37,9 @@ export function SwapComp() {
 
   const { data: minted } = useScaffoldContractRead({ contractName: "Trash", functionName: "minted" });
   const { data: ownerOfs, refetch: getOwnerOfs } = useReadOwnerOfsTrash(account.address, minted, trashContract);
-  const { data: jsons } = useReadTokenURIsUTF8(trashContract, ownerOfs);
+  const { data: jsons, isFetching } = useReadTokenURIsUTF8(trashContract, ownerOfs);
+  console.log(jsons);
+
   const { data: approves, refetch: getApproves } = useReadApproves(trashContract, ownerOfs);
   const { writeAsync: setApprovalForAll } = useScaffoldContractWrite({
     contractName: "Trash",
@@ -185,7 +187,12 @@ export function SwapComp() {
               <div className="lg:flex m-top bg-transparent">
                 <div className="lg:flex-1 m-10">
                   <h1 className="text-3xl text-center">BAG</h1>
-                  <div className="grid grid-cols-5">{nfts}</div>
+
+                  {isFetching ? (
+                    <p>Scavenging through the Dumpster...</p>
+                  ) : (
+                    <div className="grid grid-cols-5">{nfts}</div>
+                  )}
                 </div>
 
                 <div className="flex-1 m-10">

@@ -7,6 +7,10 @@ interface NftCardProps {
 }
 
 export const NftCard = (props: NftCardProps) => {
+  console.log(props.nft.id);
+
+  console.log(props.nft.image);
+
   let attributesOutput;
   if (props?.nft?.attributes?.length > 0) {
     attributesOutput = props?.nft?.attributes?.map((attribute, index) => (
@@ -34,7 +38,7 @@ export const NftCard = (props: NftCardProps) => {
       <p className="-m-2">Token ID: {props.nft.id.toString()}</p>
       {attributesOutput}
       {props?.nft?.image ? (
-        <img src={props?.nft?.image.replace("ipfs://", "https://ipfs.io/ipfs/")} width={128} height={128} />
+        <img src={props?.nft?.image.replace("ipfs://", "https://nftstorage.link/ipfs/")} width={128} height={128} />
       ) : (
         <></>
       )}

@@ -12,11 +12,15 @@ contract DumpsterDivers is Ownable, ERC721 {
     uint256 mintCount;
 
     string s_baseURI_0 =
-        "ipfs://bafybeihnzaewtxmc5zkrxyt36l4d2coy47tvoh26a2n6s5taqget4t7zda/";
-    string s_baseURI_1;
-    string s_baseURI_2;
-    string s_baseURI_3;
-    string s_baseURI_4;
+        "ipfs://bafybeie7hcmtj7w7y6yoakzc7ha4dcke6lght3l74ogw626gosf6644tpq/";
+    string s_baseURI_1 =
+        "ipfs://bafybeibuncustskrzstr6h3x6qtekbpbk5kn5zrqo4atp5p75s7j7kokpa/";
+    string s_baseURI_2 =
+        "ipfs://bafybeidwpiqaoptslgk67chhi5hqzjh4qvitta7dumrhgfa52qd3ueogvm/";
+    string s_baseURI_3 =
+        "ipfs://bafybeian7copyxccylygtuymnifkupjgznd24z2hlrtdf3b2xhugnktdte/";
+    string s_baseURI_4 =
+        "ipfs://bafybeia7ejoqm2kf6qleowv2vsjje3dxxfjwcin33vspjyo4ghpzhauryy/";
 
     constructor(
         address newOwner
@@ -59,7 +63,7 @@ contract DumpsterDivers is Ownable, ERC721 {
     ) public view returns (uint256) {
         uint256 blockNumber = block.number - rarityOffset; // Use the previous block's hash
         bytes32 blockHash = blockhash(blockNumber);
-        return (uint256(blockHash) % seed) + (rarityOffset * 10000);
+        return (uint256(blockHash) % seed);
     }
 
     function tokenURI(uint256 id) public view override returns (string memory) {

@@ -3643,7 +3643,7 @@ const deployedContracts = {
   },
   11155111: {
     Trash: {
-      address: "0x75f871257163bF5457a73A132fa36357867F808b",
+      address: "0x42B7556656ed4BB7a7fb9FaAaFE87e1E388D05BB",
       abi: [
         {
           type: "constructor",
@@ -4337,7 +4337,7 @@ const deployedContracts = {
       },
     },
     DumpsterDivers: {
-      address: "0xc7c49EddAAFBEc5662ab0bb0CFCB5cf0e3Fd3575",
+      address: "0xc6d663fC0FcCCBb18D57618A54B5f7CD99a73C40",
       abi: [
         {
           type: "constructor",
@@ -4988,7 +4988,7 @@ const deployedContracts = {
       },
     },
     DumpsterBin: {
-      address: "0xD3EACbc2686fDA3acd4CAa90A76923838C95D90A",
+      address: "0x9127258Df2Cb9B52501AA84bE91c29845326f575",
       abi: [
         {
           type: "constructor",

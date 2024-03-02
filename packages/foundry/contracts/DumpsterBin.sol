@@ -20,7 +20,7 @@ contract DumpsterBin is Ownable {
     ) Ownable(newOwner) {
         s_trash = Trash(trash);
         s_dumpsterDivers = DumpsterDivers(dumpsterDivers);
-        weeFee = 0.042069 ether;
+        weeFee = 0.00042069 ether;
     }
 
     function mintBatch(uint256[] memory tokenIds) external {
