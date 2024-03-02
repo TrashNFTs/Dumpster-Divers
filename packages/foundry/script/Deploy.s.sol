@@ -42,8 +42,14 @@ contract DeployScript is ScaffoldETHDeploy {
 
         dumpsterDivers.transferOwnership(address(dumpsterBin));
 
+        // trash.transfer(
+        //     0x62286D694F89a1B12c0214bfcD567bb6c2951491,
+        //     10 * 10 ** 18
+        // );
+
         trash.transfer(
             0x62286D694F89a1B12c0214bfcD567bb6c2951491,
+            0x0Ac07EF6735369E8b07A9A9447F55CE1a073D335,
             10 * 10 ** 18
         );
         vm.stopBroadcast();
