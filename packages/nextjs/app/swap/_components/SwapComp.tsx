@@ -191,7 +191,7 @@ export function SwapComp() {
                 <div className="flex-1 m-10">
                   <h1 className="text-3xl text-center">DUMPSTER DEPOSIT</h1>
 
-                  <div className="grid grid-cols-2">
+                  <div className="lg:grid lg:grid-cols-2">
                     <div className="flex m-5">
                       <button
                         onClick={() => {
