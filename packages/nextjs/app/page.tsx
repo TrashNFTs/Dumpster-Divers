@@ -1,12 +1,8 @@
-import SwapComp from "./swap/_components/SwapComp";
+// import SwapComp from "./swap/_components/SwapComp";
 import type { NextPage } from "next";
 
 const Home: NextPage = () => {
-  return (
-    <>
-      <SwapComp />
-    </>
-  );
+  return <>{/* <SwapComp /> */}</>;
 };
 
 export default Home;
