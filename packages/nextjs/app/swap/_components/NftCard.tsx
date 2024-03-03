@@ -9,6 +9,18 @@ interface NftCardProps {
 export const NftCard = (props: NftCardProps) => {
   return (
     <div className="flex flex-col items-center bg-slate m-1 p-1">
+      {props.buttonText ? (
+        <button
+          onClick={async () => {
+            if (props.onClaimed) await props.onClaimed();
+          }}
+          className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
+        >
+          {props.buttonText}
+        </button>
+      ) : (
+        <></>
+      )}
       {props?.nft?.image ? (
         <img src={props?.nft?.image.replace("ipfs://", "https://nftstorage.link/ipfs/")} width={128} height={128} />
       ) : (
