@@ -151,7 +151,7 @@ export function SwapComp() {
   const dumpsterDiversNfts = jsonsOfOwnedDumpsterDiversOfWallet.map((json, index) => (
     <NftCard
       key={"dumpsterDivers-" + index}
-      buttonText="Burn"
+      buttonText="Trash It"
       nft={json}
       onClaimed={async () => {
         await burn({ args: [BigInt(json.id)], value: weeFee });
