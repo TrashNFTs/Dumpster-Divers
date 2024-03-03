@@ -1060,7 +1060,7 @@ const deployedContracts = {
           name: "tokenURI",
           inputs: [
             {
-              name: "id",
+              name: "tokenId",
               type: "uint256",
               internalType: "uint256",
             },
@@ -1156,6 +1156,38 @@ const deployedContracts = {
               type: "bool",
               indexed: false,
               internalType: "bool",
+            },
+          ],
+          anonymous: false,
+        },
+        {
+          type: "event",
+          name: "BatchMetadataUpdate",
+          inputs: [
+            {
+              name: "_fromTokenId",
+              type: "uint256",
+              indexed: false,
+              internalType: "uint256",
+            },
+            {
+              name: "_toTokenId",
+              type: "uint256",
+              indexed: false,
+              internalType: "uint256",
+            },
+          ],
+          anonymous: false,
+        },
+        {
+          type: "event",
+          name: "MetadataUpdate",
+          inputs: [
+            {
+              name: "_tokenId",
+              type: "uint256",
+              indexed: false,
+              internalType: "uint256",
             },
           ],
           anonymous: false,
@@ -1339,18 +1371,18 @@ const deployedContracts = {
         owner: "lib/openzeppelin-contracts/contracts/access/Ownable.sol",
         renounceOwnership: "lib/openzeppelin-contracts/contracts/access/Ownable.sol",
         transferOwnership: "lib/openzeppelin-contracts/contracts/access/Ownable.sol",
-        approve: "lib/openzeppelin-contracts/contracts/token/ERC721/ERC721.sol",
-        balanceOf: "lib/openzeppelin-contracts/contracts/token/ERC721/ERC721.sol",
-        getApproved: "lib/openzeppelin-contracts/contracts/token/ERC721/ERC721.sol",
-        isApprovedForAll: "lib/openzeppelin-contracts/contracts/token/ERC721/ERC721.sol",
-        name: "lib/openzeppelin-contracts/contracts/token/ERC721/ERC721.sol",
-        ownerOf: "lib/openzeppelin-contracts/contracts/token/ERC721/ERC721.sol",
-        safeTransferFrom: "lib/openzeppelin-contracts/contracts/token/ERC721/ERC721.sol",
-        setApprovalForAll: "lib/openzeppelin-contracts/contracts/token/ERC721/ERC721.sol",
-        supportsInterface: "lib/openzeppelin-contracts/contracts/token/ERC721/ERC721.sol",
-        symbol: "lib/openzeppelin-contracts/contracts/token/ERC721/ERC721.sol",
-        tokenURI: "lib/openzeppelin-contracts/contracts/token/ERC721/ERC721.sol",
-        transferFrom: "lib/openzeppelin-contracts/contracts/token/ERC721/ERC721.sol",
+        approve: "lib/openzeppelin-contracts/contracts/token/ERC721/extensions/ERC721URIStorage.sol",
+        balanceOf: "lib/openzeppelin-contracts/contracts/token/ERC721/extensions/ERC721URIStorage.sol",
+        getApproved: "lib/openzeppelin-contracts/contracts/token/ERC721/extensions/ERC721URIStorage.sol",
+        isApprovedForAll: "lib/openzeppelin-contracts/contracts/token/ERC721/extensions/ERC721URIStorage.sol",
+        name: "lib/openzeppelin-contracts/contracts/token/ERC721/extensions/ERC721URIStorage.sol",
+        ownerOf: "lib/openzeppelin-contracts/contracts/token/ERC721/extensions/ERC721URIStorage.sol",
+        safeTransferFrom: "lib/openzeppelin-contracts/contracts/token/ERC721/extensions/ERC721URIStorage.sol",
+        setApprovalForAll: "lib/openzeppelin-contracts/contracts/token/ERC721/extensions/ERC721URIStorage.sol",
+        supportsInterface: "lib/openzeppelin-contracts/contracts/token/ERC721/extensions/ERC721URIStorage.sol",
+        symbol: "lib/openzeppelin-contracts/contracts/token/ERC721/extensions/ERC721URIStorage.sol",
+        tokenURI: "lib/openzeppelin-contracts/contracts/token/ERC721/extensions/ERC721URIStorage.sol",
+        transferFrom: "lib/openzeppelin-contracts/contracts/token/ERC721/extensions/ERC721URIStorage.sol",
       },
     },
     DumpsterBin: {
@@ -2608,7 +2640,7 @@ const deployedContracts = {
           name: "tokenURI",
           inputs: [
             {
-              name: "id",
+              name: "tokenId",
               type: "uint256",
               internalType: "uint256",
             },
@@ -2704,6 +2736,38 @@ const deployedContracts = {
               type: "bool",
               indexed: false,
               internalType: "bool",
+            },
+          ],
+          anonymous: false,
+        },
+        {
+          type: "event",
+          name: "BatchMetadataUpdate",
+          inputs: [
+            {
+              name: "_fromTokenId",
+              type: "uint256",
+              indexed: false,
+              internalType: "uint256",
+            },
+            {
+              name: "_toTokenId",
+              type: "uint256",
+              indexed: false,
+              internalType: "uint256",
+            },
+          ],
+          anonymous: false,
+        },
+        {
+          type: "event",
+          name: "MetadataUpdate",
+          inputs: [
+            {
+              name: "_tokenId",
+              type: "uint256",
+              indexed: false,
+              internalType: "uint256",
             },
           ],
           anonymous: false,
@@ -2887,18 +2951,18 @@ const deployedContracts = {
         owner: "lib/openzeppelin-contracts/contracts/access/Ownable.sol",
         renounceOwnership: "lib/openzeppelin-contracts/contracts/access/Ownable.sol",
         transferOwnership: "lib/openzeppelin-contracts/contracts/access/Ownable.sol",
-        approve: "lib/openzeppelin-contracts/contracts/token/ERC721/ERC721.sol",
-        balanceOf: "lib/openzeppelin-contracts/contracts/token/ERC721/ERC721.sol",
-        getApproved: "lib/openzeppelin-contracts/contracts/token/ERC721/ERC721.sol",
-        isApprovedForAll: "lib/openzeppelin-contracts/contracts/token/ERC721/ERC721.sol",
-        name: "lib/openzeppelin-contracts/contracts/token/ERC721/ERC721.sol",
-        ownerOf: "lib/openzeppelin-contracts/contracts/token/ERC721/ERC721.sol",
-        safeTransferFrom: "lib/openzeppelin-contracts/contracts/token/ERC721/ERC721.sol",
-        setApprovalForAll: "lib/openzeppelin-contracts/contracts/token/ERC721/ERC721.sol",
-        supportsInterface: "lib/openzeppelin-contracts/contracts/token/ERC721/ERC721.sol",
-        symbol: "lib/openzeppelin-contracts/contracts/token/ERC721/ERC721.sol",
-        tokenURI: "lib/openzeppelin-contracts/contracts/token/ERC721/ERC721.sol",
-        transferFrom: "lib/openzeppelin-contracts/contracts/token/ERC721/ERC721.sol",
+        approve: "lib/openzeppelin-contracts/contracts/token/ERC721/extensions/ERC721URIStorage.sol",
+        balanceOf: "lib/openzeppelin-contracts/contracts/token/ERC721/extensions/ERC721URIStorage.sol",
+        getApproved: "lib/openzeppelin-contracts/contracts/token/ERC721/extensions/ERC721URIStorage.sol",
+        isApprovedForAll: "lib/openzeppelin-contracts/contracts/token/ERC721/extensions/ERC721URIStorage.sol",
+        name: "lib/openzeppelin-contracts/contracts/token/ERC721/extensions/ERC721URIStorage.sol",
+        ownerOf: "lib/openzeppelin-contracts/contracts/token/ERC721/extensions/ERC721URIStorage.sol",
+        safeTransferFrom: "lib/openzeppelin-contracts/contracts/token/ERC721/extensions/ERC721URIStorage.sol",
+        setApprovalForAll: "lib/openzeppelin-contracts/contracts/token/ERC721/extensions/ERC721URIStorage.sol",
+        supportsInterface: "lib/openzeppelin-contracts/contracts/token/ERC721/extensions/ERC721URIStorage.sol",
+        symbol: "lib/openzeppelin-contracts/contracts/token/ERC721/extensions/ERC721URIStorage.sol",
+        tokenURI: "lib/openzeppelin-contracts/contracts/token/ERC721/extensions/ERC721URIStorage.sol",
+        transferFrom: "lib/openzeppelin-contracts/contracts/token/ERC721/extensions/ERC721URIStorage.sol",
       },
     },
     DumpsterBin: {
@@ -3800,702 +3864,8 @@ const deployedContracts = {
     },
   },
   11155111: {
-    Trash: {
-      address: "0x42B7556656ed4BB7a7fb9FaAaFE87e1E388D05BB",
-      abi: [
-        {
-          type: "constructor",
-          inputs: [
-            {
-              name: "_owner",
-              type: "address",
-              internalType: "address",
-            },
-          ],
-          stateMutability: "nonpayable",
-        },
-        {
-          type: "function",
-          name: "allowance",
-          inputs: [
-            {
-              name: "",
-              type: "address",
-              internalType: "address",
-            },
-            {
-              name: "",
-              type: "address",
-              internalType: "address",
-            },
-          ],
-          outputs: [
-            {
-              name: "",
-              type: "uint256",
-              internalType: "uint256",
-            },
-          ],
-          stateMutability: "view",
-        },
-        {
-          type: "function",
-          name: "approve",
-          inputs: [
-            {
-              name: "spender",
-              type: "address",
-              internalType: "address",
-            },
-            {
-              name: "amountOrId",
-              type: "uint256",
-              internalType: "uint256",
-            },
-          ],
-          outputs: [
-            {
-              name: "",
-              type: "bool",
-              internalType: "bool",
-            },
-          ],
-          stateMutability: "nonpayable",
-        },
-        {
-          type: "function",
-          name: "balanceOf",
-          inputs: [
-            {
-              name: "",
-              type: "address",
-              internalType: "address",
-            },
-          ],
-          outputs: [
-            {
-              name: "",
-              type: "uint256",
-              internalType: "uint256",
-            },
-          ],
-          stateMutability: "view",
-        },
-        {
-          type: "function",
-          name: "baseTokenURI",
-          inputs: [],
-          outputs: [
-            {
-              name: "",
-              type: "string",
-              internalType: "string",
-            },
-          ],
-          stateMutability: "view",
-        },
-        {
-          type: "function",
-          name: "dataURI",
-          inputs: [],
-          outputs: [
-            {
-              name: "",
-              type: "string",
-              internalType: "string",
-            },
-          ],
-          stateMutability: "view",
-        },
-        {
-          type: "function",
-          name: "decimals",
-          inputs: [],
-          outputs: [
-            {
-              name: "",
-              type: "uint8",
-              internalType: "uint8",
-            },
-          ],
-          stateMutability: "view",
-        },
-        {
-          type: "function",
-          name: "getApproved",
-          inputs: [
-            {
-              name: "",
-              type: "uint256",
-              internalType: "uint256",
-            },
-          ],
-          outputs: [
-            {
-              name: "",
-              type: "address",
-              internalType: "address",
-            },
-          ],
-          stateMutability: "view",
-        },
-        {
-          type: "function",
-          name: "isApprovedForAll",
-          inputs: [
-            {
-              name: "",
-              type: "address",
-              internalType: "address",
-            },
-            {
-              name: "",
-              type: "address",
-              internalType: "address",
-            },
-          ],
-          outputs: [
-            {
-              name: "",
-              type: "bool",
-              internalType: "bool",
-            },
-          ],
-          stateMutability: "view",
-        },
-        {
-          type: "function",
-          name: "mint",
-          inputs: [],
-          outputs: [],
-          stateMutability: "nonpayable",
-        },
-        {
-          type: "function",
-          name: "minted",
-          inputs: [],
-          outputs: [
-            {
-              name: "",
-              type: "uint256",
-              internalType: "uint256",
-            },
-          ],
-          stateMutability: "view",
-        },
-        {
-          type: "function",
-          name: "name",
-          inputs: [],
-          outputs: [
-            {
-              name: "",
-              type: "string",
-              internalType: "string",
-            },
-          ],
-          stateMutability: "view",
-        },
-        {
-          type: "function",
-          name: "owner",
-          inputs: [],
-          outputs: [
-            {
-              name: "",
-              type: "address",
-              internalType: "address",
-            },
-          ],
-          stateMutability: "view",
-        },
-        {
-          type: "function",
-          name: "ownerOf",
-          inputs: [
-            {
-              name: "id",
-              type: "uint256",
-              internalType: "uint256",
-            },
-          ],
-          outputs: [
-            {
-              name: "owner",
-              type: "address",
-              internalType: "address",
-            },
-          ],
-          stateMutability: "view",
-        },
-        {
-          type: "function",
-          name: "revokeOwnership",
-          inputs: [],
-          outputs: [],
-          stateMutability: "nonpayable",
-        },
-        {
-          type: "function",
-          name: "safeTransferFrom",
-          inputs: [
-            {
-              name: "from",
-              type: "address",
-              internalType: "address",
-            },
-            {
-              name: "to",
-              type: "address",
-              internalType: "address",
-            },
-            {
-              name: "id",
-              type: "uint256",
-              internalType: "uint256",
-            },
-          ],
-          outputs: [],
-          stateMutability: "nonpayable",
-        },
-        {
-          type: "function",
-          name: "safeTransferFrom",
-          inputs: [
-            {
-              name: "from",
-              type: "address",
-              internalType: "address",
-            },
-            {
-              name: "to",
-              type: "address",
-              internalType: "address",
-            },
-            {
-              name: "id",
-              type: "uint256",
-              internalType: "uint256",
-            },
-            {
-              name: "data",
-              type: "bytes",
-              internalType: "bytes",
-            },
-          ],
-          outputs: [],
-          stateMutability: "nonpayable",
-        },
-        {
-          type: "function",
-          name: "setApprovalForAll",
-          inputs: [
-            {
-              name: "operator",
-              type: "address",
-              internalType: "address",
-            },
-            {
-              name: "approved",
-              type: "bool",
-              internalType: "bool",
-            },
-          ],
-          outputs: [],
-          stateMutability: "nonpayable",
-        },
-        {
-          type: "function",
-          name: "setDataURI",
-          inputs: [
-            {
-              name: "_dataURI",
-              type: "string",
-              internalType: "string",
-            },
-          ],
-          outputs: [],
-          stateMutability: "nonpayable",
-        },
-        {
-          type: "function",
-          name: "setNameSymbol",
-          inputs: [
-            {
-              name: "_name",
-              type: "string",
-              internalType: "string",
-            },
-            {
-              name: "_symbol",
-              type: "string",
-              internalType: "string",
-            },
-          ],
-          outputs: [],
-          stateMutability: "nonpayable",
-        },
-        {
-          type: "function",
-          name: "setTokenURI",
-          inputs: [
-            {
-              name: "_tokenURI",
-              type: "string",
-              internalType: "string",
-            },
-          ],
-          outputs: [],
-          stateMutability: "nonpayable",
-        },
-        {
-          type: "function",
-          name: "setWhitelist",
-          inputs: [
-            {
-              name: "target",
-              type: "address",
-              internalType: "address",
-            },
-            {
-              name: "state",
-              type: "bool",
-              internalType: "bool",
-            },
-          ],
-          outputs: [],
-          stateMutability: "nonpayable",
-        },
-        {
-          type: "function",
-          name: "symbol",
-          inputs: [],
-          outputs: [
-            {
-              name: "",
-              type: "string",
-              internalType: "string",
-            },
-          ],
-          stateMutability: "view",
-        },
-        {
-          type: "function",
-          name: "tokenURI",
-          inputs: [
-            {
-              name: "id",
-              type: "uint256",
-              internalType: "uint256",
-            },
-          ],
-          outputs: [
-            {
-              name: "",
-              type: "string",
-              internalType: "string",
-            },
-          ],
-          stateMutability: "view",
-        },
-        {
-          type: "function",
-          name: "totalSupply",
-          inputs: [],
-          outputs: [
-            {
-              name: "",
-              type: "uint256",
-              internalType: "uint256",
-            },
-          ],
-          stateMutability: "view",
-        },
-        {
-          type: "function",
-          name: "transfer",
-          inputs: [
-            {
-              name: "to",
-              type: "address",
-              internalType: "address",
-            },
-            {
-              name: "amount",
-              type: "uint256",
-              internalType: "uint256",
-            },
-          ],
-          outputs: [
-            {
-              name: "",
-              type: "bool",
-              internalType: "bool",
-            },
-          ],
-          stateMutability: "nonpayable",
-        },
-        {
-          type: "function",
-          name: "transferFrom",
-          inputs: [
-            {
-              name: "from",
-              type: "address",
-              internalType: "address",
-            },
-            {
-              name: "to",
-              type: "address",
-              internalType: "address",
-            },
-            {
-              name: "amountOrId",
-              type: "uint256",
-              internalType: "uint256",
-            },
-          ],
-          outputs: [],
-          stateMutability: "nonpayable",
-        },
-        {
-          type: "function",
-          name: "transferOwnership",
-          inputs: [
-            {
-              name: "_owner",
-              type: "address",
-              internalType: "address",
-            },
-          ],
-          outputs: [],
-          stateMutability: "nonpayable",
-        },
-        {
-          type: "function",
-          name: "whitelist",
-          inputs: [
-            {
-              name: "",
-              type: "address",
-              internalType: "address",
-            },
-          ],
-          outputs: [
-            {
-              name: "",
-              type: "bool",
-              internalType: "bool",
-            },
-          ],
-          stateMutability: "view",
-        },
-        {
-          type: "event",
-          name: "Approval",
-          inputs: [
-            {
-              name: "owner",
-              type: "address",
-              indexed: true,
-              internalType: "address",
-            },
-            {
-              name: "spender",
-              type: "address",
-              indexed: true,
-              internalType: "address",
-            },
-            {
-              name: "amount",
-              type: "uint256",
-              indexed: false,
-              internalType: "uint256",
-            },
-          ],
-          anonymous: false,
-        },
-        {
-          type: "event",
-          name: "ApprovalForAll",
-          inputs: [
-            {
-              name: "owner",
-              type: "address",
-              indexed: true,
-              internalType: "address",
-            },
-            {
-              name: "operator",
-              type: "address",
-              indexed: true,
-              internalType: "address",
-            },
-            {
-              name: "approved",
-              type: "bool",
-              indexed: false,
-              internalType: "bool",
-            },
-          ],
-          anonymous: false,
-        },
-        {
-          type: "event",
-          name: "ERC20Transfer",
-          inputs: [
-            {
-              name: "from",
-              type: "address",
-              indexed: true,
-              internalType: "address",
-            },
-            {
-              name: "to",
-              type: "address",
-              indexed: true,
-              internalType: "address",
-            },
-            {
-              name: "amount",
-              type: "uint256",
-              indexed: false,
-              internalType: "uint256",
-            },
-          ],
-          anonymous: false,
-        },
-        {
-          type: "event",
-          name: "ERC721Approval",
-          inputs: [
-            {
-              name: "owner",
-              type: "address",
-              indexed: true,
-              internalType: "address",
-            },
-            {
-              name: "spender",
-              type: "address",
-              indexed: true,
-              internalType: "address",
-            },
-            {
-              name: "id",
-              type: "uint256",
-              indexed: true,
-              internalType: "uint256",
-            },
-          ],
-          anonymous: false,
-        },
-        {
-          type: "event",
-          name: "OwnershipTransferred",
-          inputs: [
-            {
-              name: "user",
-              type: "address",
-              indexed: true,
-              internalType: "address",
-            },
-            {
-              name: "newOwner",
-              type: "address",
-              indexed: true,
-              internalType: "address",
-            },
-          ],
-          anonymous: false,
-        },
-        {
-          type: "event",
-          name: "Transfer",
-          inputs: [
-            {
-              name: "from",
-              type: "address",
-              indexed: true,
-              internalType: "address",
-            },
-            {
-              name: "to",
-              type: "address",
-              indexed: true,
-              internalType: "address",
-            },
-            {
-              name: "id",
-              type: "uint256",
-              indexed: true,
-              internalType: "uint256",
-            },
-          ],
-          anonymous: false,
-        },
-        {
-          type: "error",
-          name: "AlreadyExists",
-          inputs: [],
-        },
-        {
-          type: "error",
-          name: "InvalidOwner",
-          inputs: [],
-        },
-        {
-          type: "error",
-          name: "InvalidRecipient",
-          inputs: [],
-        },
-        {
-          type: "error",
-          name: "InvalidSender",
-          inputs: [],
-        },
-        {
-          type: "error",
-          name: "NotFound",
-          inputs: [],
-        },
-        {
-          type: "error",
-          name: "Unauthorized",
-          inputs: [],
-        },
-        {
-          type: "error",
-          name: "UnsafeRecipient",
-          inputs: [],
-        },
-      ],
-      inheritedFunctions: {
-        allowance: "contracts/ERC404.sol",
-        approve: "contracts/ERC404.sol",
-        balanceOf: "contracts/ERC404.sol",
-        decimals: "contracts/ERC404.sol",
-        getApproved: "contracts/ERC404.sol",
-        isApprovedForAll: "contracts/ERC404.sol",
-        minted: "contracts/ERC404.sol",
-        name: "contracts/ERC404.sol",
-        owner: "contracts/ERC404.sol",
-        ownerOf: "contracts/ERC404.sol",
-        revokeOwnership: "contracts/ERC404.sol",
-        safeTransferFrom: "contracts/ERC404.sol",
-        setApprovalForAll: "contracts/ERC404.sol",
-        setWhitelist: "contracts/ERC404.sol",
-        symbol: "contracts/ERC404.sol",
-        tokenURI: "contracts/ERC404.sol",
-        totalSupply: "contracts/ERC404.sol",
-        transfer: "contracts/ERC404.sol",
-        transferFrom: "contracts/ERC404.sol",
-        transferOwnership: "contracts/ERC404.sol",
-        whitelist: "contracts/ERC404.sol",
-      },
-    },
     DumpsterDivers: {
-      address: "0xc6d663fC0FcCCBb18D57618A54B5f7CD99a73C40",
+      address: "0x206509D3f70d2C468ED832663755ed97d742C042",
       abi: [
         {
           type: "constructor",
@@ -4852,7 +4222,7 @@ const deployedContracts = {
           name: "tokenURI",
           inputs: [
             {
-              name: "id",
+              name: "tokenId",
               type: "uint256",
               internalType: "uint256",
             },
@@ -4948,6 +4318,38 @@ const deployedContracts = {
               type: "bool",
               indexed: false,
               internalType: "bool",
+            },
+          ],
+          anonymous: false,
+        },
+        {
+          type: "event",
+          name: "BatchMetadataUpdate",
+          inputs: [
+            {
+              name: "_fromTokenId",
+              type: "uint256",
+              indexed: false,
+              internalType: "uint256",
+            },
+            {
+              name: "_toTokenId",
+              type: "uint256",
+              indexed: false,
+              internalType: "uint256",
+            },
+          ],
+          anonymous: false,
+        },
+        {
+          type: "event",
+          name: "MetadataUpdate",
+          inputs: [
+            {
+              name: "_tokenId",
+              type: "uint256",
+              indexed: false,
+              internalType: "uint256",
             },
           ],
           anonymous: false,
@@ -5131,22 +4533,22 @@ const deployedContracts = {
         owner: "lib/openzeppelin-contracts/contracts/access/Ownable.sol",
         renounceOwnership: "lib/openzeppelin-contracts/contracts/access/Ownable.sol",
         transferOwnership: "lib/openzeppelin-contracts/contracts/access/Ownable.sol",
-        approve: "lib/openzeppelin-contracts/contracts/token/ERC721/ERC721.sol",
-        balanceOf: "lib/openzeppelin-contracts/contracts/token/ERC721/ERC721.sol",
-        getApproved: "lib/openzeppelin-contracts/contracts/token/ERC721/ERC721.sol",
-        isApprovedForAll: "lib/openzeppelin-contracts/contracts/token/ERC721/ERC721.sol",
-        name: "lib/openzeppelin-contracts/contracts/token/ERC721/ERC721.sol",
-        ownerOf: "lib/openzeppelin-contracts/contracts/token/ERC721/ERC721.sol",
-        safeTransferFrom: "lib/openzeppelin-contracts/contracts/token/ERC721/ERC721.sol",
-        setApprovalForAll: "lib/openzeppelin-contracts/contracts/token/ERC721/ERC721.sol",
-        supportsInterface: "lib/openzeppelin-contracts/contracts/token/ERC721/ERC721.sol",
-        symbol: "lib/openzeppelin-contracts/contracts/token/ERC721/ERC721.sol",
-        tokenURI: "lib/openzeppelin-contracts/contracts/token/ERC721/ERC721.sol",
-        transferFrom: "lib/openzeppelin-contracts/contracts/token/ERC721/ERC721.sol",
+        approve: "lib/openzeppelin-contracts/contracts/token/ERC721/extensions/ERC721URIStorage.sol",
+        balanceOf: "lib/openzeppelin-contracts/contracts/token/ERC721/extensions/ERC721URIStorage.sol",
+        getApproved: "lib/openzeppelin-contracts/contracts/token/ERC721/extensions/ERC721URIStorage.sol",
+        isApprovedForAll: "lib/openzeppelin-contracts/contracts/token/ERC721/extensions/ERC721URIStorage.sol",
+        name: "lib/openzeppelin-contracts/contracts/token/ERC721/extensions/ERC721URIStorage.sol",
+        ownerOf: "lib/openzeppelin-contracts/contracts/token/ERC721/extensions/ERC721URIStorage.sol",
+        safeTransferFrom: "lib/openzeppelin-contracts/contracts/token/ERC721/extensions/ERC721URIStorage.sol",
+        setApprovalForAll: "lib/openzeppelin-contracts/contracts/token/ERC721/extensions/ERC721URIStorage.sol",
+        supportsInterface: "lib/openzeppelin-contracts/contracts/token/ERC721/extensions/ERC721URIStorage.sol",
+        symbol: "lib/openzeppelin-contracts/contracts/token/ERC721/extensions/ERC721URIStorage.sol",
+        tokenURI: "lib/openzeppelin-contracts/contracts/token/ERC721/extensions/ERC721URIStorage.sol",
+        transferFrom: "lib/openzeppelin-contracts/contracts/token/ERC721/extensions/ERC721URIStorage.sol",
       },
     },
     DumpsterBin: {
-      address: "0x9127258Df2Cb9B52501AA84bE91c29845326f575",
+      address: "0x2bbE99Dec618D3320CbFD15144804216CE35570d",
       abi: [
         {
           type: "constructor",
