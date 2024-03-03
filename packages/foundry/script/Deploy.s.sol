@@ -10,7 +10,7 @@ import {DumpsterDivers, Trash, DumpsterBin} from "../contracts/DumpsterBin.sol";
 contract DeployScript is ScaffoldETHDeploy {
     error InvalidPrivateKey(string);
 
-    Trash trash;
+    // Trash trash;
     DumpsterDivers dumpsterDivers;
     DumpsterBin dumpsterBin;
 
@@ -27,16 +27,16 @@ contract DeployScript is ScaffoldETHDeploy {
 
         vm.startBroadcast(deployerPrivateKey);
 
-        trash = new Trash(deployerPubKey);
-        trash.setWhitelist(deployerPubKey, true);
-        trash.setDataURI(
-            "ipfs://bafybeiclqcx3kdoauwelxgcny25wauci6qqonfigid6y2wrv4ep4gji3gq/"
-        );
+        // trash = new Trash(deployerPubKey);
+        // trash.setWhitelist(deployerPubKey, true);
+        // trash.setDataURI(
+        //     "ipfs://bafybeiclqcx3kdoauwelxgcny25wauci6qqonfigid6y2wrv4ep4gji3gq/"
+        // );
 
         dumpsterDivers = new DumpsterDivers(deployerPubKey);
         dumpsterBin = new DumpsterBin(
-            deployerPubKey,
-            address(trash),
+            trashDaoAddress,
+            0xdf00fdE26A6819507649904Ca52FE5062eF75Ba7,
             address(dumpsterDivers)
         );
 
@@ -47,15 +47,15 @@ contract DeployScript is ScaffoldETHDeploy {
         //     10 * 10 ** 18
         // );
 
-        trash.transfer(
-            0x3bEc6a181d6Ef7239F699DAf2fAa5FE3A5f01Edf,
-            20 * 10 ** 18
-        );
+        // trash.transfer(
+        //     0x3bEc6a181d6Ef7239F699DAf2fAa5FE3A5f01Edf,
+        //     20 * 10 ** 18
+        // );
 
-        trash.transfer(
-            0x51603C7059f369aB04B16AddFB7BB6c4e34b8523,
-            20 * 10 ** 18
-        );
+        // trash.transfer(
+        //     0x51603C7059f369aB04B16AddFB7BB6c4e34b8523,
+        //     20 * 10 ** 18
+        // );
 
         vm.stopBroadcast();
 

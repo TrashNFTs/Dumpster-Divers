@@ -1,5 +1,11 @@
 import { useCallback, useEffect, useState } from "react";
 import { Nft } from "./types";
+import { Alchemy, Network } from "alchemy-sdk";
+
+const settings = {
+  apiKey: "evS55XS3rdRbTDvoSxWFz71IBJv_Mw1B", // Replace with your Alchemy API Key.
+  network: Network.BASE_MAINNET, // Replace with your network.
+};
 
 export function useReadOwnerOfsDumpsterDivers(
   accountAddress: string | undefined,
@@ -33,6 +39,53 @@ export function useReadOwnerOfsDumpsterDivers(
   return { data, refetch };
 }
 
+export function useMe(userAddr: string | undefined, trashAddr: string | undefined) {
+  const [ownedNfts, setOwnedNfts] = useState<any>();
+
+  useEffect(() => {
+    async function get() {
+      if (!userAddr || !trashAddr) return;
+
+      const alchemy = new Alchemy(settings);
+
+      const ownerAddr = userAddr;
+      console.log("fetching NFTs for address:", ownerAddr);
+      console.log("...");
+
+      // Print total NFT count returned in the response:
+      const nftsForOwner = await alchemy.nft.getNftsForOwner(userAddr);
+
+      const nfts = [];
+
+      // Print contract address and tokenId for each NFT:
+      for (const nft of nftsForOwner.ownedNfts) {
+        // nft.
+        console.log("===");
+        console.log("contract address:", nft.contract.address);
+        console.log("token ID:", nft.tokenId);
+        nfts.push(nft.tokenId);
+
+        // const response = await alchemy.nft.getNftMetadata(trashAddr, "1590");
+
+        // console.log("NFT name: ", response.name);
+        // console.log("token type: ", response.tokenType);
+        // console.log("tokenUri: ", response.tokenUri);
+        // console.log("image url: ", response.image);
+        // console.log("raw data: ", response.raw);
+        // console.log("time last updated: ", response.timeLastUpdated);
+        // console.log("===");
+
+        // nfts.push(response);
+      }
+
+      setOwnedNfts([...nfts]);
+    }
+    get();
+  }, [userAddr, trashAddr]);
+
+  return ownedNfts;
+}
+
 export function useReadOwnerOfsTrash(
   accountAddress: string | undefined,
   mintCount: bigint | undefined,
@@ -47,9 +100,13 @@ export function useReadOwnerOfsTrash(
 
     const arr: bigint[] = [];
     for (let i = 1; i <= Number(mintCount); i++) {
-      const ownerOf = await trashContract?.read.ownerOf([BigInt(i)]);
-      if (ownerOf === accountAddress) {
-        arr.push(BigInt(i));
+      try {
+        const ownerOf = await trashContract?.read.ownerOf([BigInt(i)]);
+        if (ownerOf === accountAddress) {
+          arr.push(BigInt(i));
+        }
+      } catch (e) {
+        // console.log("moving on...");
       }
     }
 

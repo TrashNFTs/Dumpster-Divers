@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useReadApproves, useReadOwnerOfsDumpsterDivers, useReadOwnerOfsTrash } from "../../../components/hooks";
+import { useMe, useReadApproves, useReadOwnerOfsDumpsterDivers } from "../../../components/hooks";
 import { useReadTokenURIs, useReadTokenURIsUTF8 } from "../../../components/hooks";
 import blue from "../../../public/BLUE.PNG";
 import green from "../../../public/GREEN.PNG";
@@ -32,17 +32,21 @@ export function SwapComp() {
     ownedDumpsterDiversOfWallet,
   );
 
-  const { data: trashContract } = useScaffoldContract({ contractName: "Trash" });
+  const { data: trashContract } = useScaffoldContract({ contractName: "trashExtneral" });
   const { data: vaultContract } = useScaffoldContract({ contractName: "DumpsterBin" });
 
-  const { data: minted } = useScaffoldContractRead({ contractName: "Trash", functionName: "minted" });
-  const { data: ownerOfs, refetch: getOwnerOfs } = useReadOwnerOfsTrash(account.address, minted, trashContract);
+  // const { data: minted } = useScaffoldContractRead({ contractName: "trashExtneral", functionName: "minted" });
+  // const { data: ownerOfs, refetch: getOwnerOfs } = useReadOwnerOfsTrash(account.address, minted, trashContract);
+
+  const ownerOfs = useMe(account.address, trashContract?.address);
+
   const { data: jsons, isFetching } = useReadTokenURIsUTF8(trashContract, ownerOfs);
-  console.log(jsons);
+
+  useMe(account.address, trashContract?.address);
 
   const { data: approves, refetch: getApproves } = useReadApproves(trashContract, ownerOfs);
   const { writeAsync: setApprovalForAll } = useScaffoldContractWrite({
-    contractName: "Trash",
+    contractName: "trashExtneral",
     functionName: "approve",
     args: [vaultContract?.address, BigInt(0)],
   });
@@ -75,7 +79,7 @@ export function SwapComp() {
   const { data: weeFee } = useScaffoldContractRead({ contractName: "DumpsterBin", functionName: "getWeeFee" });
 
   async function refreshPageData() {
-    await getOwnerOfs();
+    // await getOwnerOfs();
     // await getVaultOwnerOfs();
     await getDumpsterDiversOwnersOf();
     await getApproves();
@@ -143,9 +147,6 @@ export function SwapComp() {
     setBlues([...bluesArr]);
     setPinks([...pinksArr]);
   }, [jsons]);
-
-  console.log(greens);
-  console.log(yellows);
 
   const dumpsterDiversNfts = jsonsOfOwnedDumpsterDiversOfWallet.map((json, index) => (
     <NftCard
