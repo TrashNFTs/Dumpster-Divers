@@ -27,6 +27,7 @@ export function SwapComp() {
   const account = useAccount();
   const { data: dumpsterDiverContract } = useScaffoldContract({ contractName: "DumpsterDivers" });
 
+  console.log(dumpsterDiverContract?.address);
   const { data: mintCount } = useScaffoldContractRead({ contractName: "DumpsterDivers", functionName: "getMintCount" });
   const { data: ownedDumpsterDiversOfWallet, refetch: getDumpsterDiversOwnersOf } = useReadOwnerOfsDumpsterDivers(
     account.address,
@@ -41,6 +42,7 @@ export function SwapComp() {
 
   const { data: trashContract } = useScaffoldContract({ contractName: "Trash" });
   const { data: vaultContract } = useScaffoldContract({ contractName: "DumpsterBin" });
+  console.log(vaultContract?.address);
 
   // const { data: minted } = useScaffoldContractRead({ contractName: "Trash", functionName: "minted" });
   // const { data: ownerOfs, refetch: getOwnerOfs } = useReadOwnerOfsTrash(account.address, minted, trashContract);
