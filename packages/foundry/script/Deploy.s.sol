@@ -36,7 +36,7 @@ contract DeployScript is ScaffoldETHDeploy {
         dumpsterDivers = new DumpsterDivers(deployerPubKey);
         dumpsterBin = new DumpsterBin(
             trashDaoAddress,
-            0xdf00fde26a6819507649904ca52fe5062ef75ba7,
+            0xdf00fdE26A6819507649904Ca52FE5062eF75Ba7,
             address(dumpsterDivers)
         );
 

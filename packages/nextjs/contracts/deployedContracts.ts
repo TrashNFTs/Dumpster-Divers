@@ -703,7 +703,7 @@ const deployedContracts = {
   },
   8453: {
     DumpsterDivers: {
-      address: "0x997997839CcDcb767030428320B688397A480b4a",
+      address: "0xfC0d8e8B077DA481F5309825a88604188C2FBD7F",
       abi: [
         {
           type: "constructor",
@@ -1386,7 +1386,7 @@ const deployedContracts = {
       },
     },
     DumpsterBin: {
-      address: "0xaFB9924cEAAfE5E7AC3a2C8d8C213edA8940c937",
+      address: "0xe3D61290740B8a0F0D56985311B3dCcAD402f569",
       abi: [
         {
           type: "constructor",
