@@ -415,6 +415,11 @@ export function SwapComp() {
               </div>
             </TabPanel>
             <TabPanel>
+              <p className="text-center">
+                You can toss your Dumpster Diver back into The Dumpster to get your $TRASH back.
+                <br />
+                (just pay a wee fee of 0.0042069 ETH per Dumpster Diver re-trashed)
+              </p>
               <div className="grid grid-cols-5"> {dumpsterDiversNfts} </div>
             </TabPanel>
           </Tabs>
