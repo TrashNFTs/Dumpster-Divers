@@ -194,7 +194,7 @@ export function SwapComp() {
                 <h2 className="w-full text-2xl text-center">TRASH</h2>
               </Tab>
               <Tab className="cursor-pointer lg:ml-20 lg:mr-20 py-4 px-8 rounded-full border flex-1">
-                <h2 className="w-full text-2xl text-center">DIVERS</h2>
+                <h2 className="w-full text-2xl text-center">DIVERS PFP</h2>
               </Tab>
             </TabList>
 
