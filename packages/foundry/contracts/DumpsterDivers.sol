@@ -24,7 +24,7 @@ contract DumpsterDivers is Ownable, ERC721URIStorage {
 
     constructor(
         address newOwner
-    ) ERC721("Dumpster Divers", "DD") Ownable(newOwner) {}
+    ) ERC721("Dumpster Divers PFP", "DD") Ownable(newOwner) {}
 
     mapping(uint256 tokenId => uint256 originalTokenId) public originalTokenIds;
 

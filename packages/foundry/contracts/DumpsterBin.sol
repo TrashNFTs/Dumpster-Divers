@@ -7,6 +7,8 @@ import {Ownable} from "@openzeppelin/contracts/access/Ownable.sol";
 
 contract DumpsterBin is Ownable {
     error DUMPSTER_BIN__DID_NOT_PROVIDE_WEE_FEE();
+    error DUMPSTER_BIN__UHOH();
+    error DUMPSTER_BIN__UHOH2();
 
     Trash s_trash;
     DumpsterDivers s_dumpsterDivers;
@@ -30,6 +32,9 @@ contract DumpsterBin is Ownable {
     }
 
     function mint(uint256 tokenId) public {
+        if (tokenId > s_trash.minted()) revert DUMPSTER_BIN__UHOH2();
+        if (s_trash.ownerOf(tokenId) != msg.sender) revert DUMPSTER_BIN__UHOH();
+
         s_trash.transferFrom(msg.sender, address(this), tokenId);
         s_dumpsterDivers.mint(msg.sender, tokenId);
     }
