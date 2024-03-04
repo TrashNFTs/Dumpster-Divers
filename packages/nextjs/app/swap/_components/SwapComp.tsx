@@ -44,7 +44,7 @@ export function SwapComp() {
 
   // const { data: minted } = useScaffoldContractRead({ contractName: "Trash", functionName: "minted" });
   // const { data: ownerOfs, refetch: getOwnerOfs } = useReadOwnerOfsTrash(account.address, minted, trashContract);
-  const ownerOfs = useMe2(account.address, trashContract!.address);
+  const ownerOfs = useMe2(account.address, trashContract ? trashContract.address : undefined);
 
   // const ownerOfs = useMe("0x05A1ff0a32bc24265BCB39499d0c5D9A6cb2011c", trashContract?.address);
   // const ownerOfs = useMe(account.address, trashContract?.address);
