@@ -99,7 +99,6 @@ export function SwapComp() {
   const nfts = jsons.map((json, index) => (
     <NftCard
       key={"trash-" + index}
-      buttonText={approves[index] === vaultContract?.address ? "Swap" : "Approve"}
       nft={json}
       onClaimed={
         approves[index] === vaultContract?.address
