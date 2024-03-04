@@ -7,6 +7,8 @@ interface NftCardProps {
 }
 
 export const NftCard = (props: NftCardProps) => {
+  // console.log(props.nft);
+
   return (
     <div className="flex flex-col items-center bg-slate m-1 p-1">
       {props.buttonText ? (
@@ -27,6 +29,7 @@ export const NftCard = (props: NftCardProps) => {
         <></>
       )}
       <p>{props.nft.name}</p>
+      <p>{props.nft.id.toString()}</p>
     </div>
   );
 };

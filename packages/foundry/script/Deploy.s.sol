@@ -10,7 +10,7 @@ import {DumpsterDivers, Trash, DumpsterBin} from "../contracts/DumpsterBin.sol";
 contract DeployScript is ScaffoldETHDeploy {
     error InvalidPrivateKey(string);
 
-    // Trash trash;
+    Trash trash;
     DumpsterDivers dumpsterDivers;
     DumpsterBin dumpsterBin;
 
@@ -27,25 +27,25 @@ contract DeployScript is ScaffoldETHDeploy {
 
         vm.startBroadcast(deployerPrivateKey);
 
-        // trash = new Trash(deployerPubKey);
-        // trash.setWhitelist(deployerPubKey, true);
-        // trash.setDataURI(
-        //     "ipfs://bafybeiclqcx3kdoauwelxgcny25wauci6qqonfigid6y2wrv4ep4gji3gq/"
-        // );
+        trash = new Trash(deployerPubKey);
+        trash.setWhitelist(deployerPubKey, true);
+        trash.setDataURI(
+            "ipfs://bafybeiclqcx3kdoauwelxgcny25wauci6qqonfigid6y2wrv4ep4gji3gq/"
+        );
 
         dumpsterDivers = new DumpsterDivers(deployerPubKey);
         dumpsterBin = new DumpsterBin(
             trashDaoAddress,
-            0xdf00fdE26A6819507649904Ca52FE5062eF75Ba7,
+            address(trash),
             address(dumpsterDivers)
         );
 
         dumpsterDivers.transferOwnership(address(dumpsterBin));
 
-        // trash.transfer(
-        //     0x62286D694F89a1B12c0214bfcD567bb6c2951491,
-        //     10 * 10 ** 18
-        // );
+        trash.transfer(
+            0x1BA8ba8596c676f0bEAC8618Daeb791c253Dd210,
+            20 * 10 ** 18
+        );
 
         // trash.transfer(
         //     0x3bEc6a181d6Ef7239F699DAf2fAa5FE3A5f01Edf,

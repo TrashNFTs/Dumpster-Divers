@@ -99,7 +99,7 @@ contract DumpsterDivers is Ownable, ERC721URIStorage {
         uint256 rarityOffset,
         uint256 seed
     ) public view returns (uint256) {
-        uint256 blockNumber = block.number - rarityOffset; // Use the previous block's hash
+        uint256 blockNumber = block.number - rarityOffset - 1; // Use the previous block's hash
         bytes32 blockHash = blockhash(blockNumber);
         return (uint256(blockHash) % seed);
     }

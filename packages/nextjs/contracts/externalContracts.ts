@@ -13,7 +13,7 @@ import { GenericContractsDeclaration } from "~~/utils/scaffold-eth/contract";
  */
 const externalContracts = {
   8453: {
-    trashExtneral: {
+    Trash: {
       address: "0xdf00fdE26A6819507649904Ca52FE5062eF75Ba7",
       abi: [
         {

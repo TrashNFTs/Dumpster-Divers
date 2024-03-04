@@ -1,7 +1,12 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useMe, useReadApproves, useReadOwnerOfsDumpsterDivers } from "../../../components/hooks";
+import {
+  // useMe,
+  useMe2,
+  useReadApproves,
+  useReadOwnerOfsDumpsterDivers, // useReadOwnerOfsTrash,
+} from "../../../components/hooks";
 import { useReadTokenURIs, useReadTokenURIsUTF8 } from "../../../components/hooks";
 import blue from "../../../public/BLUE.PNG";
 import green from "../../../public/GREEN.PNG";
@@ -9,6 +14,7 @@ import grey from "../../../public/GREY.PNG";
 import pink from "../../../public/PINK.PNG";
 import yellow from "../../../public/YELLOW.PNG";
 import { NftCard } from "./NftCard";
+// import api from "api";
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import { useAccount } from "wagmi";
@@ -20,6 +26,7 @@ import { useScaffoldContract, useScaffoldContractRead, useScaffoldContractWrite 
 export function SwapComp() {
   const account = useAccount();
   const { data: dumpsterDiverContract } = useScaffoldContract({ contractName: "DumpsterDivers" });
+
   const { data: mintCount } = useScaffoldContractRead({ contractName: "DumpsterDivers", functionName: "getMintCount" });
   const { data: ownedDumpsterDiversOfWallet, refetch: getDumpsterDiversOwnersOf } = useReadOwnerOfsDumpsterDivers(
     account.address,
@@ -32,21 +39,23 @@ export function SwapComp() {
     ownedDumpsterDiversOfWallet,
   );
 
-  const { data: trashContract } = useScaffoldContract({ contractName: "trashExtneral" });
+  const { data: trashContract } = useScaffoldContract({ contractName: "Trash" });
   const { data: vaultContract } = useScaffoldContract({ contractName: "DumpsterBin" });
 
-  // const { data: minted } = useScaffoldContractRead({ contractName: "trashExtneral", functionName: "minted" });
+  // const { data: minted } = useScaffoldContractRead({ contractName: "Trash", functionName: "minted" });
   // const { data: ownerOfs, refetch: getOwnerOfs } = useReadOwnerOfsTrash(account.address, minted, trashContract);
+  const ownerOfs = useMe2(account.address, trashContract!.address);
 
-  const ownerOfs = useMe(account.address, trashContract?.address);
+  // const ownerOfs = useMe("0x05A1ff0a32bc24265BCB39499d0c5D9A6cb2011c", trashContract?.address);
+  // const ownerOfs = useMe(account.address, trashContract?.address);
 
   const { data: jsons, isFetching } = useReadTokenURIsUTF8(trashContract, ownerOfs);
 
-  useMe(account.address, trashContract?.address);
+  // useMe(account.address, trashContract?.address);
 
   const { data: approves, refetch: getApproves } = useReadApproves(trashContract, ownerOfs);
   const { writeAsync: setApprovalForAll } = useScaffoldContractWrite({
-    contractName: "trashExtneral",
+    contractName: "Trash",
     functionName: "approve",
     args: [vaultContract?.address, BigInt(0)],
   });
@@ -159,6 +168,10 @@ export function SwapComp() {
       }}
     />
   ));
+
+  for (let i = 0; i < jsonsOfOwnedDumpsterDiversOfWallet.length; i++) {
+    console.log(jsonsOfOwnedDumpsterDiversOfWallet[i].id);
+  }
 
   const [tabIndex, setTabIndex] = useState(0);
 

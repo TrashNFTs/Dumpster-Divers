@@ -1,6 +1,10 @@
 import { useCallback, useEffect, useState } from "react";
 import { Nft } from "./types";
+// import { EvmChain } from "@moralisweb3/common-evm-utils";
 import { Alchemy, Network } from "alchemy-sdk";
+
+// import api from "api";
+// import Moralis from "moralis";
 
 const settings = {
   apiKey: "evS55XS3rdRbTDvoSxWFz71IBJv_Mw1B", // Replace with your Alchemy API Key.
@@ -39,6 +43,82 @@ export function useReadOwnerOfsDumpsterDivers(
   return { data, refetch };
 }
 
+const nemonicKey = "HZcumaNRBY7uW6h4he9FpOymuYejgSPOzbjgUYsnEFFbG9kQ";
+
+export function useMe2(userAddr: string | undefined, trashAddr: string | undefined) {
+  // const sdk = api("@simplehash/v0.1#ritrjmmlmgi2upk");
+
+  const [ownedNfts, setOwnedNfts] = useState<any>();
+
+  useEffect(() => {
+    async function test() {
+      if (!trashAddr) return;
+      if (!userAddr) return;
+
+      const response = await fetch(
+        `https://base-rest.api.mnemonichq.com/wallets/v1beta2/${userAddr}/nfts?limit=500&contractAddress=${trashAddr}`,
+        {
+          headers: {
+            "X-API-Key": nemonicKey,
+            "Content-Type": "application/json",
+          },
+        },
+      );
+
+      const json = await response.json();
+
+      const nfts = [];
+
+      for (const nft of json.nfts) {
+        console.log(nft.nft.tokenId);
+
+        nfts.push(nft.nft.tokenId);
+      }
+
+      setOwnedNfts([...nfts]);
+
+      // sdk.auth(nemonicKey);
+      // await Moralis.start({
+      //   apiKey: "3238c83a-980d-40b3-80ba-25691628b717",
+      //   // ...and any other configuration
+      // });
+      // const chain = EvmChain.BASE;
+
+      // const response = await Moralis.EvmApi.nft.getWalletNFTCollections({
+      //   address: userAddr,
+      //   chain,
+      // });
+
+      // console.log(response.toJSON());
+
+      // for (let i = 0; i < 10000; i++) {
+      //   let j = i.toString();
+
+      //   try {
+      //     const response = await Moralis.EvmApi.nft.getNFTTokenIdOwners({
+      //       address,
+      //       chain,
+      //       tokenId: j,
+      //     });
+
+      //     console.log(response.toJSON());
+      //   } catch (e) {
+      //     console.log("Wrong token!");
+      //   }
+      // }
+    }
+
+    test();
+  }, [userAddr, trashAddr]);
+
+  return ownedNfts;
+
+  // sdk.server("https://base-rest.api.mnemonichq.com");
+
+  // let data = await sdk.walletsService_GetNfts({ contractAddress: trashAddr, walletAddress: userAddr });
+  // console.log(data);
+}
+
 export function useMe(userAddr: string | undefined, trashAddr: string | undefined) {
   const [ownedNfts, setOwnedNfts] = useState<any>();
 
@@ -48,11 +128,7 @@ export function useMe(userAddr: string | undefined, trashAddr: string | undefine
 
       const alchemy = new Alchemy(settings);
 
-      const ownerAddr = userAddr;
-      console.log("fetching NFTs for address:", ownerAddr);
-      console.log("...");
-
-      // Print total NFT count returned in the response:
+      // const ownerAddr = userAddr;
       const nftsForOwner = await alchemy.nft.getNftsForOwner(userAddr);
 
       const nfts = [];
@@ -60,9 +136,9 @@ export function useMe(userAddr: string | undefined, trashAddr: string | undefine
       // Print contract address and tokenId for each NFT:
       for (const nft of nftsForOwner.ownedNfts) {
         // nft.
-        console.log("===");
-        console.log("contract address:", nft.contract.address);
-        console.log("token ID:", nft.tokenId);
+        // console.log("===");
+        // console.log("contract address:", nft.contract.address);
+        // console.log("token ID:", nft.tokenId);
         nfts.push(nft.tokenId);
 
         // const response = await alchemy.nft.getNftMetadata(trashAddr, "1590");
