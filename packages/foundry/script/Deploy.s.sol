@@ -27,25 +27,25 @@ contract DeployScript is ScaffoldETHDeploy {
 
         vm.startBroadcast(deployerPrivateKey);
 
-        // trash = new Trash(deployerPubKey);
-        // trash.setWhitelist(deployerPubKey, true);
-        // trash.setDataURI(
-        //     "ipfs://bafybeiclqcx3kdoauwelxgcny25wauci6qqonfigid6y2wrv4ep4gji3gq/"
-        // );
+        trash = new Trash(deployerPubKey);
+        trash.setWhitelist(deployerPubKey, true);
+        trash.setDataURI(
+            "ipfs://bafybeiclqcx3kdoauwelxgcny25wauci6qqonfigid6y2wrv4ep4gji3gq/"
+        );
 
         dumpsterDivers = new DumpsterDivers(deployerPubKey);
         dumpsterBin = new DumpsterBin(
             trashDaoAddress,
-            0xdf00fdE26A6819507649904Ca52FE5062eF75Ba7,
+            address(trash),
             address(dumpsterDivers)
         );
 
         dumpsterDivers.transferOwnership(address(dumpsterBin));
 
-        // trash.transfer(
-        //     0x3bEc6a181d6Ef7239F699DAf2fAa5FE3A5f01Edf,
-        //     20 * 10 ** 18
-        // );
+        trash.transfer(
+            0x4161f8A8DfF60aEdB63baFb7d5843b0988393eC9,
+            20 * 10 ** 18
+        );
 
         // trash.transfer(
         //     0x3bEc6a181d6Ef7239F699DAf2fAa5FE3A5f01Edf,
